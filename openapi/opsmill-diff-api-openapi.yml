@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact Diff API
+  version: 1.10.0
+tags:
+- name: Diff
+paths:
+  /api/diff/files:
+    get:
+      summary: Get Diff Files
+      operationId: get_diff_files_api_diff_files_get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: time_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time From
+      - name: time_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time To
+      - name: branch_only
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Branch Only
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/BranchDiffRepository'
+                title: Response Get Diff Files Api Diff Files Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Diff
+  /api/diff/artifacts:
+    get:
+      summary: Get Diff Artifacts
+      operationId: get_diff_artifacts_api_diff_artifacts_get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/BranchDiffArtifact'
+                title: Response Get Diff Artifacts Api Diff Artifacts Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Diff
+components:
+  schemas:
+    BranchDiffArtifact:
+      properties:
+        branch:
+          type: string
+          title: Branch
+        id:
+          type: string
+          title: Id
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+        action:
+          $ref: '#/components/schemas/DiffAction'
+        target:
+          anyOf:
+          - $ref: '#/components/schemas/ArtifactTarget'
+          - type: 'null'
+        item_new:
+          anyOf:
+          - $ref: '#/components/schemas/BranchDiffArtifactStorage'
+          - type: 'null'
+        item_previous:
+          anyOf:
+          - $ref: '#/components/schemas/BranchDiffArtifactStorage'
+          - type: 'null'
+      type: object
+      required:
+      - branch
+      - id
+      - action
+      title: BranchDiffArtifact
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BranchDiffArtifactStorage:
+      properties:
+        storage_id:
+          type: string
+          title: Storage Id
+        checksum:
+          type: string
+          title: Checksum
+      type: object
+      required:
+      - storage_id
+      - checksum
+      title: BranchDiffArtifactStorage
+    ArtifactTarget:
+      properties:
+        id:
+          type: string
+          title: Id
+        kind:
+          type: string
+          title: Kind
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+      type: object
+      required:
+      - id
+      - kind
+      title: ArtifactTarget
+    BranchDiffFile:
+      properties:
+        branch:
+          type: string
+          title: Branch
+        location:
+          type: string
+          title: Location
+        action:
+          $ref: '#/components/schemas/DiffAction'
+      type: object
+      required:
+      - branch
+      - location
+      - action
+      title: BranchDiffFile
+    BranchDiffRepository:
+      properties:
+        branch:
+          type: string
+          title: Branch
+        id:
+          type: string
+          title: Id
+        display_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Name
+        commit_from:
+          type: string
+          title: Commit From
+        commit_to:
+          type: string
+          title: Commit To
+        files:
+          items:
+            $ref: '#/components/schemas/BranchDiffFile'
+          type: array
+          title: Files
+      type: object
+      required:
+      - branch
+      - id
+      - commit_from
+      - commit_to
+      title: BranchDiffRepository
+    DiffAction:
+      type: string
+      enum:
+      - added
+      - removed
+      - updated
+      - unchanged
+      title: DiffAction
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY

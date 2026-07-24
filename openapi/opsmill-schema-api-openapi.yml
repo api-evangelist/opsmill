@@ -1,0 +1,2510 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact Schema API
+  version: 1.10.0
+tags:
+- name: Schema
+paths:
+  /api/schema:
+    get:
+      summary: Get Schema
+      operationId: get_schema_api_schema_get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: namespaces
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          title: Namespaces
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaReadAPI'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Schema
+  /api/schema/summary:
+    get:
+      summary: Get Schema Summary
+      operationId: get_schema_summary_api_schema_summary_get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaBranchHash'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Schema
+  /api/schema/{schema_kind}:
+    get:
+      summary: Get Schema By Kind
+      operationId: get_schema_by_kind_api_schema__schema_kind__get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: schema_kind
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Schema Kind
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/APIProfileSchema'
+                - $ref: '#/components/schemas/APINodeSchema'
+                - $ref: '#/components/schemas/APIGenericSchema'
+                - $ref: '#/components/schemas/APITemplateSchema'
+                title: Response Get Schema By Kind Api Schema  Schema Kind  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Schema
+  /api/schema/json_schema/{schema_kind}:
+    get:
+      summary: Get Json Schema By Kind
+      operationId: get_json_schema_by_kind_api_schema_json_schema__schema_kind__get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: schema_kind
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Schema Kind
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONSchema'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Schema
+  /api/schema/load:
+    post:
+      summary: Load Schema
+      operationId: load_schema_api_schema_load_post
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      - name: at
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Time to use for the query, in absolute or relative format
+          title: At
+        description: Time to use for the query, in absolute or relative format
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemasLoadAPI'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaUpdate'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Schema
+  /api/schema/check:
+    post:
+      summary: Check Schema
+      operationId: check_schema_api_schema_check_post
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemasLoadAPI'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Schema
+components:
+  schemas:
+    ComputedAttribute-Input:
+      allOf:
+      - if:
+          properties:
+            kind:
+              const: Jinja2
+        then:
+          properties:
+            jinja2_template:
+              type: string
+              minLength: 1
+          required:
+          - jinja2_template
+      - if:
+          properties:
+            kind:
+              const: TransformPython
+        then:
+          properties:
+            transform:
+              type: string
+              minLength: 1
+          required:
+          - transform
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        kind:
+          $ref: '#/components/schemas/ComputedAttributeKind'
+        jinja2_template:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Jinja2 Template
+          description: The Jinja2 template in string format, required when assignment_type=jinja2
+        transform:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Transform
+          description: The Python Transform name or ID, required when assignment_type=transform
+      additionalProperties: false
+      type: object
+      required:
+      - kind
+      title: ComputedAttribute
+    RelationshipKind:
+      type: string
+      enum:
+      - Generic
+      - Attribute
+      - Component
+      - Parent
+      - Group
+      - Hierarchy
+      - Profile
+      - Template
+      title: RelationshipKind
+    NodeExtensionSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        kind:
+          type: string
+          title: Kind
+        attributes:
+          items:
+            $ref: '#/components/schemas/AttributeSchema-Input'
+          type: array
+          title: Attributes
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipSchema'
+          type: array
+          title: Relationships
+      additionalProperties: false
+      type: object
+      required:
+      - kind
+      title: NodeExtensionSchema
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    SchemaExtension:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        nodes:
+          items:
+            $ref: '#/components/schemas/NodeExtensionSchema'
+          type: array
+          title: Nodes
+      additionalProperties: false
+      type: object
+      title: SchemaExtension
+    APIGenericSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the node
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the node/generic after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 32
+          minLength: 2
+          pattern: ^[A-Z][a-zA-Z0-9]+$
+          title: Name
+          description: Node name, must be unique within a namespace and must start with an uppercase letter.
+          update: migration_required
+        namespace:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[A-Z][a-z0-9]+$
+          title: Namespace
+          description: Node Namespace, Namespaces are used to organize models into logical groups and to prevent name collisions.
+          update: migration_required
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the model, will be visible in the frontend.
+          update: allowed
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name/kind
+          update: allowed
+        branch:
+          $ref: '#/components/schemas/BranchSupportType'
+          description: Type of branch support for the model.
+          default: aware
+          update: not_supported
+        default_filter:
+          anyOf:
+          - type: string
+            pattern: ^[a-z0-9\_]*$
+          - type: 'null'
+          title: Default Filter
+          description: 'Default filter used to search for a node in addition to its ID. (deprecated: please use human_friendly_id instead)'
+          update: allowed
+        human_friendly_id:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Human Friendly Id
+          description: Human friendly and unique identifier for the object.
+          update: allowed
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+          description: Attribute or Jinja2 template to use to generate the display label
+          update: allowed
+        display_labels:
+          anyOf:
+          - items:
+              type: string
+              deprecationMessage: display_labels are deprecated use display_label instead
+            type: array
+          - type: 'null'
+          title: Display Labels
+          description: List of attributes to use to generate the display label (deprecated)
+          update: allowed
+        include_in_menu:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include In Menu
+          description: Defines if objects of this kind should be included in the menu.
+          update: allowed
+        menu_placement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Menu Placement
+          description: Defines where in the menu this object should be placed.
+          update: allowed
+        icon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Icon
+          description: Defines the icon to use in the menu. Must be a valid value from the MDI library https://icon-sets.iconify.design/mdi/
+          update: allowed
+        order_by:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Order By
+          description: List of entries to order results by. Supports attributes, relationship attributes, and node_metadata with __asc/__desc.
+          update: allowed
+        uniqueness_constraints:
+          anyOf:
+          - items:
+              items:
+                type: string
+              type: array
+            type: array
+          - type: 'null'
+          title: Uniqueness Constraints
+          description: List of multi-element uniqueness constraints that can combine relationships and attributes
+          update: migration_required
+        documentation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Documentation
+          description: Link to a documentation associated with this object, can be internal or external.
+          update: allowed
+        attributes:
+          items:
+            $ref: '#/components/schemas/AttributeSchema-Output'
+          type: array
+          title: Attributes
+          description: Node attributes
+          update: not_applicable
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipSchema'
+          type: array
+          title: Relationships
+          description: Node Relationships
+          update: not_applicable
+        hierarchical:
+          type: boolean
+          title: Hierarchical
+          description: Defines if the Generic support the hierarchical mode.
+          default: false
+          update: validate_constraint
+        generate_profile:
+          type: boolean
+          title: Generate Profile
+          description: Indicate if a profile schema should be generated for this schema
+          default: true
+          update: validate_constraint
+        used_by:
+          items:
+            type: string
+          type: array
+          title: Used By
+          description: List of Nodes that are referencing this Generic
+          update: not_applicable
+        restricted_namespaces:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Restricted Namespaces
+          description: Nodes inheriting from this Generic schema must belong to one of the listed namespaces
+          update: allowed
+        kind:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kind
+        hash:
+          type: string
+          title: Hash
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - namespace
+      - hash
+      title: APIGenericSchema
+    HashableModelState:
+      type: string
+      enum:
+      - present
+      - absent
+      title: HashableModelState
+    GenericSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the node
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the node/generic after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 32
+          minLength: 2
+          pattern: ^[A-Z][a-zA-Z0-9]+$
+          title: Name
+          description: Node name, must be unique within a namespace and must start with an uppercase letter.
+          update: migration_required
+        namespace:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[A-Z][a-z0-9]+$
+          title: Namespace
+          description: Node Namespace, Namespaces are used to organize models into logical groups and to prevent name collisions.
+          update: migration_required
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the model, will be visible in the frontend.
+          update: allowed
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name/kind
+          update: allowed
+        branch:
+          $ref: '#/components/schemas/BranchSupportType'
+          description: Type of branch support for the model.
+          default: aware
+          update: not_supported
+        default_filter:
+          anyOf:
+          - type: string
+            pattern: ^[a-z0-9\_]*$
+          - type: 'null'
+          title: Default Filter
+          description: 'Default filter used to search for a node in addition to its ID. (deprecated: please use human_friendly_id instead)'
+          update: allowed
+        human_friendly_id:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Human Friendly Id
+          description: Human friendly and unique identifier for the object.
+          update: allowed
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+          description: Attribute or Jinja2 template to use to generate the display label
+          update: allowed
+        display_labels:
+          anyOf:
+          - items:
+              type: string
+              deprecationMessage: display_labels are deprecated use display_label instead
+            type: array
+          - type: 'null'
+          title: Display Labels
+          description: List of attributes to use to generate the display label (deprecated)
+          update: allowed
+        include_in_menu:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include In Menu
+          description: Defines if objects of this kind should be included in the menu.
+          update: allowed
+        menu_placement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Menu Placement
+          description: Defines where in the menu this object should be placed.
+          update: allowed
+        icon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Icon
+          description: Defines the icon to use in the menu. Must be a valid value from the MDI library https://icon-sets.iconify.design/mdi/
+          update: allowed
+        order_by:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Order By
+          description: List of entries to order results by. Supports attributes, relationship attributes, and node_metadata with __asc/__desc.
+          update: allowed
+        uniqueness_constraints:
+          anyOf:
+          - items:
+              items:
+                type: string
+              type: array
+            type: array
+          - type: 'null'
+          title: Uniqueness Constraints
+          description: List of multi-element uniqueness constraints that can combine relationships and attributes
+          update: migration_required
+        documentation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Documentation
+          description: Link to a documentation associated with this object, can be internal or external.
+          update: allowed
+        attributes:
+          items:
+            $ref: '#/components/schemas/AttributeSchema-Input'
+          type: array
+          title: Attributes
+          description: Node attributes
+          update: not_applicable
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipSchema'
+          type: array
+          title: Relationships
+          description: Node Relationships
+          update: not_applicable
+        hierarchical:
+          type: boolean
+          title: Hierarchical
+          description: Defines if the Generic support the hierarchical mode.
+          default: false
+          update: validate_constraint
+        generate_profile:
+          type: boolean
+          title: Generate Profile
+          description: Indicate if a profile schema should be generated for this schema
+          default: true
+          update: validate_constraint
+        used_by:
+          items:
+            type: string
+          type: array
+          title: Used By
+          description: List of Nodes that are referencing this Generic
+          update: not_applicable
+        restricted_namespaces:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Restricted Namespaces
+          description: Nodes inheriting from this Generic schema must belong to one of the listed namespaces
+          update: allowed
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - namespace
+      title: GenericSchema
+      description: A Generic can be either an Interface or a Union depending if there are some Attributes or Relationships defined.
+    APINodeSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the node
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the node/generic after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 32
+          minLength: 2
+          pattern: ^[A-Z][a-zA-Z0-9]+$
+          title: Name
+          description: Node name, must be unique within a namespace and must start with an uppercase letter.
+          update: migration_required
+        namespace:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[A-Z][a-z0-9]+$
+          title: Namespace
+          description: Node Namespace, Namespaces are used to organize models into logical groups and to prevent name collisions.
+          update: migration_required
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the model, will be visible in the frontend.
+          update: allowed
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name/kind
+          update: allowed
+        branch:
+          $ref: '#/components/schemas/BranchSupportType'
+          description: Type of branch support for the model.
+          default: aware
+          update: not_supported
+        default_filter:
+          anyOf:
+          - type: string
+            pattern: ^[a-z0-9\_]*$
+          - type: 'null'
+          title: Default Filter
+          description: 'Default filter used to search for a node in addition to its ID. (deprecated: please use human_friendly_id instead)'
+          update: allowed
+        human_friendly_id:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Human Friendly Id
+          description: Human friendly and unique identifier for the object.
+          update: allowed
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+          description: Attribute or Jinja2 template to use to generate the display label
+          update: allowed
+        display_labels:
+          anyOf:
+          - items:
+              type: string
+              deprecationMessage: display_labels are deprecated use display_label instead
+            type: array
+          - type: 'null'
+          title: Display Labels
+          description: List of attributes to use to generate the display label (deprecated)
+          update: allowed
+        include_in_menu:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include In Menu
+          description: Defines if objects of this kind should be included in the menu.
+          update: allowed
+        menu_placement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Menu Placement
+          description: Defines where in the menu this object should be placed.
+          update: allowed
+        icon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Icon
+          description: Defines the icon to use in the menu. Must be a valid value from the MDI library https://icon-sets.iconify.design/mdi/
+          update: allowed
+        order_by:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Order By
+          description: List of entries to order results by. Supports attributes, relationship attributes, and node_metadata with __asc/__desc.
+          update: allowed
+        uniqueness_constraints:
+          anyOf:
+          - items:
+              items:
+                type: string
+              type: array
+            type: array
+          - type: 'null'
+          title: Uniqueness Constraints
+          description: List of multi-element uniqueness constraints that can combine relationships and attributes
+          update: migration_required
+        documentation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Documentation
+          description: Link to a documentation associated with this object, can be internal or external.
+          update: allowed
+        attributes:
+          items:
+            $ref: '#/components/schemas/AttributeSchema-Output'
+          type: array
+          title: Attributes
+          description: Node attributes
+          update: not_applicable
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipSchema'
+          type: array
+          title: Relationships
+          description: Node Relationships
+          update: not_applicable
+        inherit_from:
+          items:
+            type: string
+          type: array
+          title: Inherit From
+          description: List of Generic Kind that this node is inheriting from
+          update: validate_constraint
+        generate_profile:
+          type: boolean
+          title: Generate Profile
+          description: Indicate if a profile schema should be generated for this schema
+          default: true
+          update: validate_constraint
+        generate_template:
+          type: boolean
+          title: Generate Template
+          description: Indicate if an object template schema should be generated for this schema
+          default: false
+          update: allowed
+        hierarchy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hierarchy
+          description: Internal value to track the name of the Hierarchy, must match the name of a Generic supporting hierarchical mode
+          update: validate_constraint
+        parent:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent
+          description: Expected Kind for the parent node in a Hierarchy, default to the main generic defined if not defined.
+          update: validate_constraint
+        children:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Children
+          description: Expected Kind for the children nodes in a Hierarchy, default to the main generic defined if not defined.
+          update: validate_constraint
+        kind:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kind
+        hash:
+          type: string
+          title: Hash
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - namespace
+      - hash
+      title: APINodeSchema
+    JSONSchema:
+      properties:
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+          description: Title of the schema
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Description of the schema
+        type:
+          type: string
+          title: Type
+          description: Type of the schema element (e.g., 'object', 'array', 'string')
+        properties:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Properties
+          description: Properties of the object if type is 'object'
+        items:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Items
+          description: Items of the array if type is 'array'
+        required:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Required
+          description: List of required properties if type is 'object'
+        $schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: $Schema
+          description: Schema version identifier
+        additionalProperties:
+          anyOf:
+          - type: boolean
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Additionalproperties
+          description: Specifies whether additional properties are allowed
+      type: object
+      required:
+      - type
+      title: JSONSchema
+    RelationshipSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the relationship schema
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the relationship after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[a-z0-9\_]+$
+          title: Name
+          description: Relationship name, must be unique within a model and must be all lowercase.
+          update: allowed
+        peer:
+          type: string
+          pattern: ^[A-Z][a-zA-Z0-9]+$
+          title: Peer
+          description: Type (kind) of objects supported on the other end of the relationship.
+          update: validate_constraint
+        kind:
+          $ref: '#/components/schemas/RelationshipKind'
+          description: Defines the type of the relationship.
+          default: Generic
+          update: allowed
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name. Will be autogenerated if not provided
+          update: allowed
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the relationship.
+          update: allowed
+        identifier:
+          anyOf:
+          - type: string
+            maxLength: 128
+            pattern: ^[a-z0-9\_]+$
+          - type: 'null'
+          title: Identifier
+          description: Unique identifier of the relationship within a model, identifiers must match to traverse a relationship on both direction.
+          update: allowed
+        cardinality:
+          $ref: '#/components/schemas/RelationshipCardinality'
+          description: Defines how many objects are expected on the other side of the relationship.
+          default: many
+          update: validate_constraint
+        min_count:
+          type: integer
+          title: Min Count
+          description: Defines the minimum objects allowed on the other side of the relationship.
+          default: 0
+          update: validate_constraint
+        max_count:
+          type: integer
+          title: Max Count
+          description: Defines the maximum objects allowed on the other side of the relationship.
+          default: 0
+          update: validate_constraint
+        common_parent:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Common Parent
+          description: Name of a parent relationship on the peer schema that must share the same related object with the object's parent.
+          update: validate_constraint
+        common_relatives:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Common Relatives
+          description: List of relationship names on the peer schema for which all objects must share the same set of peers.
+          update: allowed
+        order_weight:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Order Weight
+          description: Number used to order the relationship in the frontend (table and view). Lowest value will be ordered first.
+          update: allowed
+        optional:
+          type: boolean
+          title: Optional
+          description: Indicate if this relationship is mandatory or optional.
+          default: true
+          update: validate_constraint
+        branch:
+          anyOf:
+          - $ref: '#/components/schemas/BranchSupportType'
+          - type: 'null'
+          description: Type of branch support for the relationship. If not defined, it will be determined based on both peers.
+          update: not_supported
+        inherited:
+          type: boolean
+          title: Inherited
+          description: Internal value to indicate if the relationship was inherited from a Generic node.
+          default: false
+          update: not_applicable
+        direction:
+          $ref: '#/components/schemas/RelationshipDirection'
+          description: Defines the direction of the relationship,  Unidirectional relationship are required when the same model is on both side.
+          default: bidirectional
+          update: not_supported
+        hierarchical:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hierarchical
+          description: Internal attribute to track the type of hierarchy this relationship is part of, must match a valid Generic Kind
+          update: not_supported
+        on_delete:
+          anyOf:
+          - $ref: '#/components/schemas/RelationshipDeleteBehavior'
+          - type: 'null'
+          description: Default is no-action. If cascade, related node(s) are deleted when this node is deleted.
+          update: allowed
+        allow_override:
+          $ref: '#/components/schemas/AllowOverrideType'
+          description: Type of allowed override for the relationship.
+          default: any
+          update: allowed
+        read_only:
+          type: boolean
+          title: Read Only
+          description: Set the relationship as read-only, users won't be able to change its value.
+          default: false
+          update: allowed
+        deprecation:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Deprecation
+          description: Mark relationship as deprecated and provide a user-friendly message to display
+          update: allowed
+        display:
+          $ref: '#/components/schemas/SchemaAttributeDisplay'
+          description: Controls where the relationship is displayed. 'default' shows in the main view, 'extra' shows in an expanded/secondary section.
+          default: default
+          update: allowed
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - peer
+      title: RelationshipSchema
+    SchemasLoadAPI:
+      properties:
+        schemas:
+          items:
+            $ref: '#/components/schemas/SchemaLoadAPI'
+          type: array
+          title: Schemas
+      type: object
+      required:
+      - schemas
+      title: SchemasLoadAPI
+    NumberAttributeParameters:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        min_value:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Min Value
+          description: Set a minimum value allowed.
+          update: validate_constraint
+        max_value:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Value
+          description: Set a maximum value allowed.
+          update: validate_constraint
+        excluded_values:
+          anyOf:
+          - type: string
+            pattern: ^(\d+(?:-\d+)?)(?:,\d+(?:-\d+)?)*$
+          - type: 'null'
+          title: Excluded Values
+          description: 'List of values or range of values not allowed for the attribute, format is: ''100,150-200,280,300-400'''
+          update: validate_constraint
+      additionalProperties: false
+      type: object
+      title: NumberAttributeParameters
+    SchemaBranchHash:
+      properties:
+        main:
+          type: string
+          title: Main
+        nodes:
+          additionalProperties:
+            type: string
+          type: object
+          title: Nodes
+        generics:
+          additionalProperties:
+            type: string
+          type: object
+          title: Generics
+      type: object
+      required:
+      - main
+      title: SchemaBranchHash
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BranchSupportType:
+      type: string
+      enum:
+      - aware
+      - agnostic
+      - local
+      title: BranchSupportType
+    ListAttributeParameters:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        regex:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Regex
+          description: Regular expression that each list item value must match if defined
+          update: validate_constraint
+      additionalProperties: false
+      type: object
+      title: ListAttributeParameters
+      description: Parameters for List attributes supporting regex validation on list items.
+    ComputedAttribute-Output:
+      additionalProperties: true
+      type: object
+    APIProfileSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the node
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the node/generic after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 32
+          minLength: 2
+          pattern: ^[A-Z][a-zA-Z0-9]+$
+          title: Name
+          description: Node name, must be unique within a namespace and must start with an uppercase letter.
+          update: migration_required
+        namespace:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[A-Z][a-z0-9]+$
+          title: Namespace
+          description: Node Namespace, Namespaces are used to organize models into logical groups and to prevent name collisions.
+          update: migration_required
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the model, will be visible in the frontend.
+          update: allowed
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name/kind
+          update: allowed
+        branch:
+          $ref: '#/components/schemas/BranchSupportType'
+          description: Type of branch support for the model.
+          default: aware
+          update: not_supported
+        default_filter:
+          anyOf:
+          - type: string
+            pattern: ^[a-z0-9\_]*$
+          - type: 'null'
+          title: Default Filter
+          description: 'Default filter used to search for a node in addition to its ID. (deprecated: please use human_friendly_id instead)'
+          update: allowed
+        human_friendly_id:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Human Friendly Id
+          description: Human friendly and unique identifier for the object.
+          update: allowed
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+          description: Attribute or Jinja2 template to use to generate the display label
+          update: allowed
+        display_labels:
+          anyOf:
+          - items:
+              type: string
+              deprecationMessage: display_labels are deprecated use display_label instead
+            type: array
+          - type: 'null'
+          title: Display Labels
+          description: List of attributes to use to generate the display label (deprecated)
+          update: allowed
+        include_in_menu:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include In Menu
+          description: Defines if objects of this kind should be included in the menu.
+          update: allowed
+        menu_placement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Menu Placement
+          description: Defines where in the menu this object should be placed.
+          update: allowed
+        icon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Icon
+          description: Defines the icon to use in the menu. Must be a valid value from the MDI library https://icon-sets.iconify.design/mdi/
+          update: allowed
+        order_by:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Order By
+          description: List of entries to order results by. Supports attributes, relationship attributes, and node_metadata with __asc/__desc.
+          update: allowed
+        uniqueness_constraints:
+          anyOf:
+          - items:
+              items:
+                type: string
+              type: array
+            type: array
+          - type: 'null'
+          title: Uniqueness Constraints
+          description: List of multi-element uniqueness constraints that can combine relationships and attributes
+          update: migration_required
+        documentation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Documentation
+          description: Link to a documentation associated with this object, can be internal or external.
+          update: allowed
+        attributes:
+          items:
+            $ref: '#/components/schemas/AttributeSchema-Output'
+          type: array
+          title: Attributes
+          description: Node attributes
+          update: not_applicable
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipSchema'
+          type: array
+          title: Relationships
+          description: Node Relationships
+          update: not_applicable
+        inherit_from:
+          items:
+            type: string
+          type: array
+          title: Inherit From
+          description: List of Generic Kind that this profile is inheriting from
+        kind:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kind
+        hash:
+          type: string
+          title: Hash
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - namespace
+      - hash
+      title: APIProfileSchema
+    SchemaAttributeDisplay:
+      type: string
+      enum:
+      - default
+      - extra
+      title: SchemaAttributeDisplay
+    SchemaNamespace:
+      properties:
+        name:
+          type: string
+          title: Name
+        user_editable:
+          type: boolean
+          title: User Editable
+      type: object
+      required:
+      - name
+      - user_editable
+      title: SchemaNamespace
+    DropdownChoice:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        color:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Color
+        label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Label
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      title: DropdownChoice
+    SchemaWarningKind:
+      properties:
+        kind:
+          type: string
+          title: Kind
+          description: The kind impacted by the warning
+        field:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Field
+          description: The attribute or relationship impacted by the warning
+      type: object
+      required:
+      - kind
+      title: SchemaWarningKind
+    SchemaLoadAPI:
+      properties:
+        version:
+          type: string
+          title: Version
+        generics:
+          items:
+            $ref: '#/components/schemas/GenericSchema'
+          type: array
+          title: Generics
+        nodes:
+          items:
+            $ref: '#/components/schemas/NodeSchema'
+          type: array
+          title: Nodes
+        extensions:
+          $ref: '#/components/schemas/SchemaExtension'
+          default:
+            state: present
+            nodes: []
+      additionalProperties: false
+      type: object
+      required:
+      - version
+      title: SchemaLoadAPI
+    NodeSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the node
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the node/generic after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 32
+          minLength: 2
+          pattern: ^[A-Z][a-zA-Z0-9]+$
+          title: Name
+          description: Node name, must be unique within a namespace and must start with an uppercase letter.
+          update: migration_required
+        namespace:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[A-Z][a-z0-9]+$
+          title: Namespace
+          description: Node Namespace, Namespaces are used to organize models into logical groups and to prevent name collisions.
+          update: migration_required
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the model, will be visible in the frontend.
+          update: allowed
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name/kind
+          update: allowed
+        branch:
+          $ref: '#/components/schemas/BranchSupportType'
+          description: Type of branch support for the model.
+          default: aware
+          update: not_supported
+        default_filter:
+          anyOf:
+          - type: string
+            pattern: ^[a-z0-9\_]*$
+          - type: 'null'
+          title: Default Filter
+          description: 'Default filter used to search for a node in addition to its ID. (deprecated: please use human_friendly_id instead)'
+          update: allowed
+        human_friendly_id:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Human Friendly Id
+          description: Human friendly and unique identifier for the object.
+          update: allowed
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+          description: Attribute or Jinja2 template to use to generate the display label
+          update: allowed
+        display_labels:
+          anyOf:
+          - items:
+              type: string
+              deprecationMessage: display_labels are deprecated use display_label instead
+            type: array
+          - type: 'null'
+          title: Display Labels
+          description: List of attributes to use to generate the display label (deprecated)
+          update: allowed
+        include_in_menu:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include In Menu
+          description: Defines if objects of this kind should be included in the menu.
+          update: allowed
+        menu_placement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Menu Placement
+          description: Defines where in the menu this object should be placed.
+          update: allowed
+        icon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Icon
+          description: Defines the icon to use in the menu. Must be a valid value from the MDI library https://icon-sets.iconify.design/mdi/
+          update: allowed
+        order_by:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Order By
+          description: List of entries to order results by. Supports attributes, relationship attributes, and node_metadata with __asc/__desc.
+          update: allowed
+        uniqueness_constraints:
+          anyOf:
+          - items:
+              items:
+                type: string
+              type: array
+            type: array
+          - type: 'null'
+          title: Uniqueness Constraints
+          description: List of multi-element uniqueness constraints that can combine relationships and attributes
+          update: migration_required
+        documentation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Documentation
+          description: Link to a documentation associated with this object, can be internal or external.
+          update: allowed
+        attributes:
+          items:
+            $ref: '#/components/schemas/AttributeSchema-Input'
+          type: array
+          title: Attributes
+          description: Node attributes
+          update: not_applicable
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipSchema'
+          type: array
+          title: Relationships
+          description: Node Relationships
+          update: not_applicable
+        inherit_from:
+          items:
+            type: string
+          type: array
+          title: Inherit From
+          description: List of Generic Kind that this node is inheriting from
+          update: validate_constraint
+        generate_profile:
+          type: boolean
+          title: Generate Profile
+          description: Indicate if a profile schema should be generated for this schema
+          default: true
+          update: validate_constraint
+        generate_template:
+          type: boolean
+          title: Generate Template
+          description: Indicate if an object template schema should be generated for this schema
+          default: false
+          update: allowed
+        hierarchy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hierarchy
+          description: Internal value to track the name of the Hierarchy, must match the name of a Generic supporting hierarchical mode
+          update: validate_constraint
+        parent:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent
+          description: Expected Kind for the parent node in a Hierarchy, default to the main generic defined if not defined.
+          update: validate_constraint
+        children:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Children
+          description: Expected Kind for the children nodes in a Hierarchy, default to the main generic defined if not defined.
+          update: validate_constraint
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - namespace
+      title: NodeSchema
+    AttributeParameters:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+      additionalProperties: false
+      type: object
+      title: AttributeParameters
+    AllowOverrideType:
+      type: string
+      enum:
+      - none
+      - any
+      title: AllowOverrideType
+    SchemaDiff:
+      properties:
+        added:
+          additionalProperties:
+            $ref: '#/components/schemas/HashableModelDiff'
+          type: object
+          title: Added
+        changed:
+          additionalProperties:
+            $ref: '#/components/schemas/HashableModelDiff'
+          type: object
+          title: Changed
+        removed:
+          additionalProperties:
+            $ref: '#/components/schemas/HashableModelDiff'
+          type: object
+          title: Removed
+      additionalProperties: false
+      type: object
+      title: SchemaDiff
+    AttributeSchema-Input:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the attribute
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the attribute after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[a-z0-9\_]+$
+          title: Name
+          description: Attribute name, must be unique within a model and must be all lowercase.
+          update: migration_required
+        kind:
+          type: string
+          title: Kind
+          description: Defines the type of the attribute.
+          update: migration_required
+        enum:
+          anyOf:
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Enum
+          description: Define a list of valid values for the attribute.
+          update: validate_constraint
+        computed_attribute:
+          anyOf:
+          - $ref: '#/components/schemas/ComputedAttribute-Input'
+          - type: 'null'
+          description: Defines how the value of this attribute will be populated.
+          update: allowed
+        choices:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/DropdownChoice'
+            type: array
+          - type: 'null'
+          title: Choices
+          description: Define a list of valid choices for a dropdown attribute.
+          update: validate_constraint
+        regex:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Regex
+          description: 'Regex uses to limit the characters allowed in for the attributes. (deprecated: please use parameters.regex instead)'
+          update: validate_constraint
+        max_length:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Length
+          description: 'Set a maximum number of characters allowed for a given attribute. (deprecated: please use parameters.max_length instead)'
+          update: validate_constraint
+        min_length:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Min Length
+          description: 'Set a minimum number of characters allowed for a given attribute. (deprecated: please use parameters.min_length instead)'
+          update: validate_constraint
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name. Will be autogenerated if not provided
+          update: allowed
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the attribute.
+          update: allowed
+        read_only:
+          type: boolean
+          title: Read Only
+          description: Set the attribute as Read-Only, users won't be able to change its value. Mainly relevant for internal object.
+          default: false
+          update: migration_required
+        unique:
+          type: boolean
+          title: Unique
+          description: Indicate if the value of this attribute must be unique in the database for a given model.
+          default: false
+          update: migration_required
+        optional:
+          type: boolean
+          title: Optional
+          description: Indicate if this attribute is mandatory or optional.
+          default: false
+          update: migration_required
+        branch:
+          anyOf:
+          - $ref: '#/components/schemas/BranchSupportType'
+          - type: 'null'
+          description: Type of branch support for the attribute, if not defined it will be inherited from the node.
+          update: not_supported
+        order_weight:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Order Weight
+          description: Number used to order the attribute in the frontend (table and view). Lowest value will be ordered first.
+          update: allowed
+        default_value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Default Value
+          description: Default value of the attribute.
+          update: allowed
+        inherited:
+          type: boolean
+          title: Inherited
+          description: Internal value to indicate if the attribute was inherited from a Generic node.
+          default: false
+          update: not_applicable
+        allow_override:
+          $ref: '#/components/schemas/AllowOverrideType'
+          description: Type of allowed override for the attribute.
+          default: any
+          update: allowed
+        parameters:
+          anyOf:
+          - $ref: '#/components/schemas/AttributeParameters'
+          - $ref: '#/components/schemas/ListAttributeParameters'
+          - $ref: '#/components/schemas/TextAttributeParameters'
+          - $ref: '#/components/schemas/NumberAttributeParameters'
+          - $ref: '#/components/schemas/NumberPoolParameters'
+          title: Parameters
+          description: Extra parameters specific to this kind of attribute
+          update: validate_constraint
+        deprecation:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Deprecation
+          description: Mark attribute as deprecated and provide a user-friendly message to display
+          update: allowed
+        display:
+          $ref: '#/components/schemas/SchemaAttributeDisplay'
+          description: Controls where the attribute is displayed. 'default' shows in the main view, 'extra' shows in an expanded/secondary section.
+          default: default
+          update: allowed
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - kind
+      title: AttributeSchema
+    RelationshipDirection:
+      type: string
+      enum:
+      - bidirectional
+      - outbound
+      - inbound
+      title: RelationshipDirection
+    AttributeSchema-Output:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the attribute
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the attribute after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[a-z0-9\_]+$
+          title: Name
+          description: Attribute name, must be unique within a model and must be all lowercase.
+          update: migration_required
+        kind:
+          type: string
+          title: Kind
+          description: Defines the type of the attribute.
+          update: migration_required
+        enum:
+          anyOf:
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Enum
+          description: Define a list of valid values for the attribute.
+          update: validate_constraint
+        computed_attribute:
+          anyOf:
+          - $ref: '#/components/schemas/ComputedAttribute-Output'
+          - type: 'null'
+          description: Defines how the value of this attribute will be populated.
+          update: allowed
+        choices:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/DropdownChoice'
+            type: array
+          - type: 'null'
+          title: Choices
+          description: Define a list of valid choices for a dropdown attribute.
+          update: validate_constraint
+        regex:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Regex
+          description: 'Regex uses to limit the characters allowed in for the attributes. (deprecated: please use parameters.regex instead)'
+          update: validate_constraint
+        max_length:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Length
+          description: 'Set a maximum number of characters allowed for a given attribute. (deprecated: please use parameters.max_length instead)'
+          update: validate_constraint
+        min_length:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Min Length
+          description: 'Set a minimum number of characters allowed for a given attribute. (deprecated: please use parameters.min_length instead)'
+          update: validate_constraint
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name. Will be autogenerated if not provided
+          update: allowed
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the attribute.
+          update: allowed
+        read_only:
+          type: boolean
+          title: Read Only
+          description: Set the attribute as Read-Only, users won't be able to change its value. Mainly relevant for internal object.
+          default: false
+          update: migration_required
+        unique:
+          type: boolean
+          title: Unique
+          description: Indicate if the value of this attribute must be unique in the database for a given model.
+          default: false
+          update: migration_required
+        optional:
+          type: boolean
+          title: Optional
+          description: Indicate if this attribute is mandatory or optional.
+          default: false
+          update: migration_required
+        branch:
+          anyOf:
+          - $ref: '#/components/schemas/BranchSupportType'
+          - type: 'null'
+          description: Type of branch support for the attribute, if not defined it will be inherited from the node.
+          update: not_supported
+        order_weight:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Order Weight
+          description: Number used to order the attribute in the frontend (table and view). Lowest value will be ordered first.
+          update: allowed
+        default_value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Default Value
+          description: Default value of the attribute.
+          update: allowed
+        inherited:
+          type: boolean
+          title: Inherited
+          description: Internal value to indicate if the attribute was inherited from a Generic node.
+          default: false
+          update: not_applicable
+        allow_override:
+          $ref: '#/components/schemas/AllowOverrideType'
+          description: Type of allowed override for the attribute.
+          default: any
+          update: allowed
+        parameters:
+          anyOf:
+          - $ref: '#/components/schemas/AttributeParameters'
+          - $ref: '#/components/schemas/ListAttributeParameters'
+          - $ref: '#/components/schemas/TextAttributeParameters'
+          - $ref: '#/components/schemas/NumberAttributeParameters'
+          - $ref: '#/components/schemas/NumberPoolParameters'
+          title: Parameters
+          description: Extra parameters specific to this kind of attribute
+          update: validate_constraint
+        deprecation:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Deprecation
+          description: Mark attribute as deprecated and provide a user-friendly message to display
+          update: allowed
+        display:
+          $ref: '#/components/schemas/SchemaAttributeDisplay'
+          description: Controls where the attribute is displayed. 'default' shows in the main view, 'extra' shows in an expanded/secondary section.
+          default: default
+          update: allowed
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - kind
+      title: AttributeSchema
+    SchemaReadAPI:
+      properties:
+        main:
+          type: string
+          title: Main
+          description: Main hash for the entire schema
+        nodes:
+          items:
+            $ref: '#/components/schemas/APINodeSchema'
+          type: array
+          title: Nodes
+        generics:
+          items:
+            $ref: '#/components/schemas/APIGenericSchema'
+          type: array
+          title: Generics
+        profiles:
+          items:
+            $ref: '#/components/schemas/APIProfileSchema'
+          type: array
+          title: Profiles
+        templates:
+          items:
+            $ref: '#/components/schemas/APITemplateSchema'
+          type: array
+          title: Templates
+        namespaces:
+          items:
+            $ref: '#/components/schemas/SchemaNamespace'
+          type: array
+          title: Namespaces
+      type: object
+      required:
+      - main
+      title: SchemaReadAPI
+    RelationshipDeleteBehavior:
+      type: string
+      enum:
+      - no-action
+      - cascade
+      title: RelationshipDeleteBehavior
+    HashableModelDiff:
+      properties:
+        added:
+          additionalProperties:
+            anyOf:
+            - $ref: '#/components/schemas/HashableModelDiff'
+            - type: 'null'
+          type: object
+          title: Added
+        changed:
+          additionalProperties:
+            anyOf:
+            - $ref: '#/components/schemas/HashableModelDiff'
+            - type: 'null'
+          type: object
+          title: Changed
+        removed:
+          additionalProperties:
+            anyOf:
+            - $ref: '#/components/schemas/HashableModelDiff'
+            - type: 'null'
+          type: object
+          title: Removed
+      additionalProperties: false
+      type: object
+      title: HashableModelDiff
+    SchemaWarningType:
+      type: string
+      enum:
+      - deprecation
+      title: SchemaWarningType
+    SchemaUpdate:
+      properties:
+        hash:
+          type: string
+          title: Hash
+          description: The new hash for the entire schema
+        previous_hash:
+          type: string
+          title: Previous Hash
+          description: The previous hash for the entire schema
+        diff:
+          $ref: '#/components/schemas/SchemaDiff'
+          description: The modifications to the schema
+        warnings:
+          items:
+            $ref: '#/components/schemas/SchemaWarning'
+          type: array
+          title: Warnings
+          description: Warnings encountered while loading the schema
+        schema_updated:
+          type: boolean
+          title: Schema Updated
+          description: Indicates if the loading of the schema changed the existing schema.
+          readOnly: true
+      type: object
+      required:
+      - hash
+      - previous_hash
+      - diff
+      - schema_updated
+      title: SchemaUpdate
+    SchemaWarning:
+      properties:
+        type:
+          $ref: '#/components/schemas/SchemaWarningType'
+          description: The type of warning
+        kinds:
+          items:
+            $ref: '#/components/schemas/SchemaWarningKind'
+          type: array
+          title: Kinds
+          description: The kinds impacted by the warning
+        message:
+          type: string
+          title: Message
+          description: The message that describes the warning
+      type: object
+      required:
+      - type
+      - message
+      title: SchemaWarning
+    NumberPoolParameters:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        end_range:
+          type: integer
+          title: End Range
+          description: End range for numbers for the associated NumberPool
+          default: 9223372036854775807
+          update: validate_constraint
+        start_range:
+          type: integer
+          title: Start Range
+          description: Start range for numbers for the associated NumberPool
+          default: 1
+          update: validate_constraint
+        number_pool_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Number Pool Id
+          description: The ID of the numberpool associated with this attribute. Only set after the number pool has been provisioned.
+          update: not_supported
+      additionalProperties: false
+      type: object
+      title: NumberPoolParameters
+    ComputedAttributeKind:
+      type: string
+      enum:
+      - User
+      - Jinja2
+      - TransformPython
+      title: ComputedAttributeKind
+    RelationshipCardinality:
+      type: string
+      enum:
+      - one
+      - many
+      title: RelationshipCardinality
+    APITemplateSchema:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: The ID of the node
+          update: not_applicable
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          description: Expected state of the node/generic after loading the schema
+          default: present
+          update: not_applicable
+        name:
+          type: string
+          maxLength: 32
+          minLength: 2
+          pattern: ^[A-Z][a-zA-Z0-9]+$
+          title: Name
+          description: Node name, must be unique within a namespace and must start with an uppercase letter.
+          update: migration_required
+        namespace:
+          type: string
+          maxLength: 64
+          minLength: 3
+          pattern: ^[A-Z][a-z0-9]+$
+          title: Namespace
+          description: Node Namespace, Namespaces are used to organize models into logical groups and to prevent name collisions.
+          update: migration_required
+        description:
+          anyOf:
+          - type: string
+            maxLength: 128
+          - type: 'null'
+          title: Description
+          description: Short description of the model, will be visible in the frontend.
+          update: allowed
+        label:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Label
+          description: Human friendly representation of the name/kind
+          update: allowed
+        branch:
+          $ref: '#/components/schemas/BranchSupportType'
+          description: Type of branch support for the model.
+          default: aware
+          update: not_supported
+        default_filter:
+          anyOf:
+          - type: string
+            pattern: ^[a-z0-9\_]*$
+          - type: 'null'
+          title: Default Filter
+          description: 'Default filter used to search for a node in addition to its ID. (deprecated: please use human_friendly_id instead)'
+          update: allowed
+        human_friendly_id:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Human Friendly Id
+          description: Human friendly and unique identifier for the object.
+          update: allowed
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
+          description: Attribute or Jinja2 template to use to generate the display label
+          update: allowed
+        display_labels:
+          anyOf:
+          - items:
+              type: string
+              deprecationMessage: display_labels are deprecated use display_label instead
+            type: array
+          - type: 'null'
+          title: Display Labels
+          description: List of attributes to use to generate the display label (deprecated)
+          update: allowed
+        include_in_menu:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Include In Menu
+          description: Defines if objects of this kind should be included in the menu.
+          update: allowed
+        menu_placement:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Menu Placement
+          description: Defines where in the menu this object should be placed.
+          update: allowed
+        icon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Icon
+          description: Defines the icon to use in the menu. Must be a valid value from the MDI library https://icon-sets.iconify.design/mdi/
+          update: allowed
+        order_by:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Order By
+          description: List of entries to order results by. Supports attributes, relationship attributes, and node_metadata with __asc/__desc.
+          update: allowed
+        uniqueness_constraints:
+          anyOf:
+          - items:
+              items:
+                type: string
+              type: array
+            type: array
+          - type: 'null'
+          title: Uniqueness Constraints
+          description: List of multi-element uniqueness constraints that can combine relationships and attributes
+          update: migration_required
+        documentation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Documentation
+          description: Link to a documentation associated with this object, can be internal or external.
+          update: allowed
+        attributes:
+          items:
+            $ref: '#/components/schemas/AttributeSchema-Output'
+          type: array
+          title: Attributes
+          description: Node attributes
+          update: not_applicable
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipSchema'
+          type: array
+          title: Relationships
+          description: Node Relationships
+          update: not_applicable
+        inherit_from:
+          items:
+            type: string
+          type: array
+          title: Inherit From
+          description: List of Generic Kind that this template is inheriting from
+        kind:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Kind
+        hash:
+          type: string
+          title: Hash
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - namespace
+      - hash
+      title: APITemplateSchema
+    TextAttributeParameters:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        state:
+          $ref: '#/components/schemas/HashableModelState'
+          default: present
+        regex:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Regex
+          description: Regular expression that attribute value must match if defined
+          update: validate_constraint
+        min_length:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Min Length
+          description: Set a minimum number of characters allowed.
+          update: validate_constraint
+        max_length:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Length
+          description: Set a maximum number of characters allowed.
+          update: validate_constraint
+      additionalProperties: false
+      type: object
+      title: TextAttributeParameters
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY

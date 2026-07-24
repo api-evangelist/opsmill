@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact Oidc API
+  version: 1.10.0
+tags:
+- name: Oidc
+paths:
+  /api/oidc/{provider_name}/authorize:
+    get:
+      summary: Authorize
+      operationId: authorize_api_oidc__provider_name__authorize_get
+      parameters:
+      - name: provider_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Provider Name
+      - name: final_url
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Final Url
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Oidc
+  /api/oidc/{provider_name}/token:
+    get:
+      summary: Token
+      operationId: token_api_oidc__provider_name__token_get
+      parameters:
+      - name: provider_name
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Provider Name
+      - name: state
+        in: query
+        required: true
+        schema:
+          type: string
+          title: State
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Code
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTokenWithUrl'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Oidc
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UserTokenWithUrl:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+          description: JWT access_token
+        refresh_token:
+          type: string
+          title: Refresh Token
+          description: JWT refresh_token
+        final_url:
+          type: string
+          title: Final Url
+          description: The final url after logged in
+      type: object
+      required:
+      - access_token
+      - refresh_token
+      - final_url
+      title: UserTokenWithUrl
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY

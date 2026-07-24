@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact Auth API
+  version: 1.10.0
+tags:
+- name: Auth
+paths:
+  /api/auth/login:
+    post:
+      summary: Login User
+      operationId: login_user_api_auth_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordCredential'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserToken'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Auth
+  /api/auth/refresh:
+    post:
+      summary: Refresh Jwt Token
+      operationId: refresh_jwt_token_api_auth_refresh_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+      security:
+      - HTTPBearer: []
+      tags:
+      - Auth
+  /api/auth/logout:
+    post:
+      summary: Logout
+      operationId: logout_api_auth_logout_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+      tags:
+      - Auth
+  /api/auth/ldap/login:
+    post:
+      summary: Login Ldap
+      operationId: login_ldap_api_auth_ldap_login_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LDAPCredentials'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserToken'
+        '401':
+          description: Authentication failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LDAPAuthErrorResponse'
+        '403':
+          description: Enterprise runtime not active.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnterpriseRequiredResponse'
+        '409':
+          description: Username collides with an existing local-only account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LDAPCollisionResponse'
+        '502':
+          description: LDAP directory unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LDAPAuthErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Auth
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PasswordCredential:
+      properties:
+        username:
+          type: string
+          title: Username
+          description: Name of the user that is logging in.
+        password:
+          type: string
+          title: Password
+          description: The password of the user.
+      type: object
+      required:
+      - username
+      - password
+      title: PasswordCredential
+    AccessTokenResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+          description: JWT access_token
+      type: object
+      required:
+      - access_token
+      title: AccessTokenResponse
+    EnterpriseRequiredResponse:
+      properties:
+        error_code:
+          type: string
+          title: Error Code
+          default: ENTERPRISE_REQUIRED
+        feature:
+          type: string
+          title: Feature
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - feature
+      title: EnterpriseRequiredResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LDAPAuthErrorResponse:
+      properties:
+        error_code:
+          type: string
+          title: Error Code
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - error_code
+      title: LDAPAuthErrorResponse
+    LDAPCredentials:
+      properties:
+        username:
+          type: string
+          maxLength: 256
+          minLength: 1
+          title: Username
+        password:
+          type: string
+          minLength: 1
+          title: Password
+      type: object
+      required:
+      - username
+      - password
+      title: LDAPCredentials
+    LDAPCollisionResponse:
+      properties:
+        error_code:
+          type: string
+          title: Error Code
+          default: LDAP_ACCOUNT_COLLISION
+        account_name:
+          type: string
+          title: Account Name
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - account_name
+      title: LDAPCollisionResponse
+    UserToken:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+          description: JWT access_token
+        refresh_token:
+          type: string
+          title: Refresh Token
+          description: JWT refresh_token
+      type: object
+      required:
+      - access_token
+      - refresh_token
+      title: UserToken
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY

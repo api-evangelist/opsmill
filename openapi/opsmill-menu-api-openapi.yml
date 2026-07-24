@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact Menu API
+  version: 1.10.0
+tags:
+- name: Menu
+paths:
+  /api/menu:
+    get:
+      summary: Get Menu
+      operationId: get_menu_api_menu_get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      - name: at
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Time to use for the query, in absolute or relative format
+          title: At
+        description: Time to use for the query, in absolute or relative format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Menu'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Menu
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MenuItemList:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        namespace:
+          type: string
+          title: Namespace
+          description: Namespace of the menu item
+        name:
+          type: string
+          title: Name
+          description: Name of the menu item
+        description:
+          type: string
+          title: Description
+          description: Description of the menu item
+          default: ''
+        protected:
+          type: boolean
+          title: Protected
+          description: Whether the menu item is protected
+          default: false
+        label:
+          type: string
+          title: Label
+          description: Title of the menu item
+        path:
+          type: string
+          title: Path
+          description: URL endpoint if applicable
+          default: ''
+        icon:
+          type: string
+          title: Icon
+          description: The icon to show for the current view
+          default: ''
+        kind:
+          type: string
+          title: Kind
+          description: Kind of the model associated with this menuitem if applicable
+          default: ''
+        order_weight:
+          type: integer
+          title: Order Weight
+          default: 5000
+        section:
+          $ref: '#/components/schemas/MenuSection'
+          default: object
+        permissions:
+          items:
+            type: string
+          type: array
+          title: Permissions
+        children:
+          items:
+            $ref: '#/components/schemas/MenuItemList'
+          type: array
+          title: Children
+          description: Child objects
+        identifier:
+          type: string
+          title: Identifier
+          readOnly: true
+      type: object
+      required:
+      - namespace
+      - name
+      - label
+      - identifier
+      title: MenuItemList
+    Menu:
+      properties:
+        sections:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/MenuItemList'
+            type: array
+          type: object
+          title: Sections
+      type: object
+      title: Menu
+    MenuSection:
+      type: string
+      enum:
+      - object
+      - internal
+      title: MenuSection
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY

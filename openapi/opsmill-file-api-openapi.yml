@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact File API
+  version: 1.10.0
+tags:
+- name: File
+paths:
+  /api/file/{repository_id}/{file_path}:
+    get:
+      summary: Get File
+      description: "Retrieve a file from a git repository.\n\nRaises:\n    CommitNotFoundError: When no commit is provided and the repository has no commits.\n    PropagatedFromWorkerError: When the worker returns an error response while reading the file."
+      operationId: get_file_api_file__repository_id___file_path__get
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      parameters:
+      - name: repository_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Repository Id
+      - name: file_path
+        in: path
+        required: true
+        schema:
+          type: string
+          title: File Path
+      - name: commit
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Commit
+      - name: branch
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Name of the branch to use for the query
+          title: Branch
+        description: Name of the branch to use for the query
+      - name: at
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Time to use for the query, in absolute or relative format
+          title: At
+        description: Time to use for the query, in absolute or relative format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - File
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY

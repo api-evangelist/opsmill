@@ -1,0 +1,276 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact Config API
+  version: 1.10.0
+tags:
+- name: Config
+paths:
+  /api/config:
+    get:
+      summary: Get Config
+      operationId: get_config_api_config_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigAPI'
+      tags:
+      - Config
+components:
+  schemas:
+    LDAPInfo:
+      properties:
+        enabled:
+          type: boolean
+          title: Enabled
+          description: True when LDAP sign-in is available on this deployment, meaning it has been configured and the running edition supports it.
+          default: false
+        display_label:
+          type: string
+          title: Display Label
+          description: Text shown on the LDAP sign-in button on the login page.
+          default: Sign in with LDAP
+        icon:
+          type: string
+          title: Icon
+          description: Icon shown on the LDAP sign-in button on the login page.
+          default: mdi:account-key-outline
+      type: object
+      title: LDAPInfo
+    MainSettings:
+      properties:
+        docs_index_path:
+          type: string
+          format: path
+          title: Docs Index Path
+          description: Full path of saved json containing pre-indexed documentation
+          default: /opt/infrahub/docs/build/search-index.json
+        internal_address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Internal Address
+        allow_anonymous_access:
+          type: boolean
+          title: Allow Anonymous Access
+          description: Indicates if the system allows anonymous read access
+          default: true
+        anonymous_access_role:
+          type: string
+          title: Anonymous Access Role
+          description: Name of the role defining which permissions anonymous users have
+          default: Anonymous User
+        telemetry_optout:
+          type: boolean
+          title: Telemetry Optout
+          description: Disable anonymous usage reporting
+          default: false
+        telemetry_endpoint:
+          type: string
+          title: Telemetry Endpoint
+          default: https://telemetry.opsmill.cloud/infrahub
+        permission_backends:
+          items:
+            type: string
+          type: array
+          title: Permission Backends
+          description: List of modules to handle permissions, they will be run in the given order
+          default:
+          - infrahub.permissions.LocalPermissionBackend
+        public_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Public Url
+          description: Define the public URL of the Infrahub, might be required for OAuth2 and OIDC depending on your infrastructure.
+        schema_strict_mode:
+          type: boolean
+          title: Schema Strict Mode
+          description: Enable strict schema validation. When set to `False`, `human_friendly_id` schema fields should not necessarily target a unique combination of peer attributes.
+          default: true
+        diff_update_after_merge:
+          type: boolean
+          title: Diff Update After Merge
+          description: When enabled, diff updates are triggered for active branches after a branch merge.
+          default: true
+        delete_branch_after_merge:
+          type: boolean
+          title: Delete Branch After Merge
+          description: When enabled, the Infrahub branch is automatically deleted after a successful merge.
+          default: false
+      additionalProperties: false
+      type: object
+      title: MainSettings
+    PolicySettings:
+      properties:
+        required_proposed_change_approvals:
+          type: integer
+          minimum: 0.0
+          title: Required Proposed Change Approvals
+          description: 'Number of approvals required for proposed changes. (Enterprise only: not available in the community version.)'
+          default: 0
+        revoke_proposed_change_approvals:
+          type: boolean
+          title: Revoke Proposed Change Approvals
+          description: 'Boolean indicating whether performing changes on a proposed change branch should revoke existing approvals. (Enterprise only: not available in the community version.)'
+          default: false
+      additionalProperties: false
+      type: object
+      title: PolicySettings
+    ConfigAPI:
+      properties:
+        main:
+          $ref: '#/components/schemas/MainSettings'
+        logging:
+          $ref: '#/components/schemas/LoggingSettings'
+        analytics:
+          $ref: '#/components/schemas/AnalyticsSettings'
+        experimental_features:
+          $ref: '#/components/schemas/ExperimentalFeaturesSettings'
+        sso:
+          $ref: '#/components/schemas/SSOInfo'
+        ldap:
+          $ref: '#/components/schemas/LDAPInfo'
+        installation_type:
+          type: string
+          title: Installation Type
+        policy:
+          $ref: '#/components/schemas/PolicySettings'
+      type: object
+      required:
+      - main
+      - logging
+      - analytics
+      - experimental_features
+      - sso
+      - ldap
+      - installation_type
+      - policy
+      title: ConfigAPI
+    ExperimentalFeaturesSettings:
+      properties:
+        graphql_enums:
+          type: boolean
+          title: Graphql Enums
+          default: false
+        value_db_index:
+          type: boolean
+          title: Value Db Index
+          default: false
+          deprecated: true
+      additionalProperties: false
+      type: object
+      title: ExperimentalFeaturesSettings
+    LoggingSettings:
+      properties:
+        remote:
+          $ref: '#/components/schemas/RemoteLoggingSettings'
+          default:
+            enable: false
+      additionalProperties: false
+      type: object
+      title: LoggingSettings
+    AnalyticsSettings:
+      properties:
+        enable:
+          type: boolean
+          title: Enable
+          default: true
+        address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+      additionalProperties: false
+      type: object
+      title: AnalyticsSettings
+    SSOProviderInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+        display_label:
+          type: string
+          title: Display Label
+        icon:
+          type: string
+          title: Icon
+        protocol:
+          $ref: '#/components/schemas/SSOProtocol'
+        authorize_path:
+          type: string
+          title: Authorize Path
+          readOnly: true
+        token_path:
+          type: string
+          title: Token Path
+          readOnly: true
+      type: object
+      required:
+      - name
+      - display_label
+      - icon
+      - protocol
+      - authorize_path
+      - token_path
+      title: SSOProviderInfo
+    RemoteLoggingSettings:
+      properties:
+        enable:
+          type: boolean
+          title: Enable
+          default: false
+        frontend_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Frontend Dsn
+        api_server_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Server Dsn
+        git_agent_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Git Agent Dsn
+      additionalProperties: false
+      type: object
+      title: RemoteLoggingSettings
+    SSOProtocol:
+      type: string
+      enum:
+      - oauth2
+      - oidc
+      title: SSOProtocol
+    SSOInfo:
+      properties:
+        providers:
+          items:
+            $ref: '#/components/schemas/SSOProviderInfo'
+          type: array
+          title: Providers
+        enabled:
+          type: boolean
+          title: Enabled
+          readOnly: true
+      type: object
+      required:
+      - enabled
+      title: SSOInfo
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY

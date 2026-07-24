@@ -1,0 +1,46 @@
+openapi: 3.1.0
+info:
+  title: Infrahub Artifact Info API
+  version: 1.10.0
+tags:
+- name: Info
+paths:
+  /api/info:
+    get:
+      summary: Get Info
+      operationId: get_info_api_info_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoAPI'
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      tags:
+      - Info
+components:
+  schemas:
+    InfoAPI:
+      properties:
+        deployment_id:
+          type: string
+          title: Deployment Id
+        version:
+          type: string
+          title: Version
+      type: object
+      required:
+      - deployment_id
+      - version
+      title: InfoAPI
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
+    APIKeyHeader:
+      type: apiKey
+      in: header
+      name: X-INFRAHUB-KEY
