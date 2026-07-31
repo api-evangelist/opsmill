@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/opsmill/infrahub/releases
+docs: https://docs.infrahub.app/release-notes
+scheme: semver
+current_version: 1.10.5
+product: Infrahub
+entries:
+- version: 1.10.5
+  date: '2026-07-15'
+  breaking: false
+  highlights:
+  - Fixed a race condition in diff recalculation after branch rebase.
+- version: 1.10.4
+  date: '2026-07-13'
+  breaking: false
+  highlights:
+  - Added cluster member support.
+  - Fixed database naming validation.
+- version: 1.10.3
+  date: '2026-07-08'
+  breaking: false
+  highlights:
+  - Added auto-expiring initialization locks.
+  - Improved IPv6 search handling.
+- version: 1.9.10
+  date: '2026-07-07'
+  breaking: false
+  highlights:
+  - Fixed branch merge rollback for database errors.
+- version: 1.10.2
+  date: '2026-07-03'
+  breaking: false
+  highlights:
+  - Fixed event handling for nodes with many relationship peers.
+- version: 1.10.1
+  date: '2026-07-01'
+  breaking: false
+  highlights:
+  - Added graph path traversal.
+  - Fixed Git sync for non-main branches.
+- version: 1.10.0
+  date: '2026-06-23'
+  breaking: false
+  highlights:
+  - Major release with topology explorer and LDAP authentication.

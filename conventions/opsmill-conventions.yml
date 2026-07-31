@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/opsmill-infrahub-openapi-original.json
+docs: https://docs.infrahub.app/reference
+authentication:
+  styles:
+  - JWT bearer (Authorization: Bearer <token>) via /api/auth/login + /api/auth/refresh
+  - API key header (X-INFRAHUB-KEY)
+  - SSO via OAuth2 / OIDC providers and LDAP (Enterprise)
+  see: authentication/opsmill-authentication.yml
+branching:
+  param: branch
+  notes: >-
+    Almost every read/write is branch-aware. A `branch` query parameter (REST)
+    or branch argument (GraphQL) selects the branch context; the global/main
+    branch is the default. This is Infrahub's defining convention — data is
+    versioned and changes are proposed and reviewed before merge.
+pagination:
+  style: offset-limit
+  notes: >-
+    GraphQL queries expose offset/limit arguments and a `count` plus `edges { node }`
+    envelope for collections. REST list endpoints accept standard offset/limit.
+idempotency:
+  supported: false
+  notes: >-
+    No documented Idempotency-Key header. Write safety is achieved instead
+    through branch isolation and upsert semantics (node_upsert / GraphQL upsert
+    mutations key on unique/HFID identifiers), plus human-reviewed Proposed
+    Changes before merge.
+versioning:
+  scheme: semver
+  see: lifecycle/opsmill-lifecycle.yml
+error_envelope:
+  field: detail
+  see: errors/opsmill-problem-types.yml
+rate_limiting:
+  documented: false

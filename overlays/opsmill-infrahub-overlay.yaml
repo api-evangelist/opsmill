@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Infrahub REST API
+  version: 1.0.0
+extends: openapi/opsmill-infrahub-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: opsmill
+    x-apievangelist-product: Infrahub
+    x-apievangelist-primary-api: GraphQL
+    x-apievangelist-docs: https://docs.infrahub.app/
+    description: >-
+      Infrahub REST API — schema loading, artifact retrieval, object storage,
+      authentication (JWT, OAuth2/OIDC, LDAP) and diff/file access. The REST API
+      complements Infrahub's primary GraphQL API. Enriched by API Evangelist.
+- target: $.servers
+  update:
+  - url: https://sandbox.infrahub.app/api
+    description: Public Infrahub sandbox (read/write demo instance).
+- target: $.components.securitySchemes.APIKeyHeader
+  update:
+    description: >-
+      Infrahub account API token, sent in the X-INFRAHUB-KEY header. Create
+      tokens from the web UI or via infrahubctl.
+- target: $.components.securitySchemes.HTTPBearer
+  update:
+    description: >-
+      JWT access token obtained from POST /api/auth/login and refreshed via
+      POST /api/auth/refresh.

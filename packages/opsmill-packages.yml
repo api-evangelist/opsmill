@@ -1,0 +1,49 @@
+generated: '2026-07-20'
+method: searched
+source: https://pypi.org/project/infrahub-sdk/
+packages:
+- language: python
+  registry: pypi
+  name: infrahub-sdk
+  url: https://pypi.org/project/infrahub-sdk/
+  install: pip install infrahub-sdk
+  version: 1.22.1
+  official: true
+  repository: https://github.com/opsmill/infrahub-sdk-python
+  notes: >-
+    Official Python client for Infrahub. The `ctl` extra (pip install
+    'infrahub-sdk[ctl]') provides the infrahubctl CLI.
+- language: python
+  registry: pypi
+  name: infrahub-mcp
+  url: https://pypi.org/project/infrahub-mcp/
+  install: pip install infrahub-mcp
+  official: true
+  repository: https://github.com/opsmill/infrahub-mcp
+  notes: Official Infrahub Model Context Protocol (MCP) server.
+- language: python
+  registry: pypi
+  name: infrahub-sync
+  url: https://pypi.org/project/infrahub-sync/
+  install: pip install infrahub-sync
+  official: true
+  repository: https://github.com/opsmill/infrahub-sync
+  notes: >-
+    Data synchronization between Infrahub and platforms like NetBox and
+    Nautobot, with a Typer-based CLI.
+- language: python
+  registry: ansible-galaxy
+  name: opsmill.infrahub
+  url: https://galaxy.ansible.com/ui/repo/published/opsmill/infrahub/
+  install: ansible-galaxy collection install opsmill.infrahub
+  official: true
+  repository: https://github.com/opsmill/infrahub-ansible
+  notes: Official Ansible Collection for managing Infrahub.
+- language: python
+  registry: pypi
+  name: nornir-infrahub
+  url: https://pypi.org/project/nornir-infrahub/
+  install: pip install nornir-infrahub
+  official: true
+  repository: https://github.com/opsmill/nornir-infrahub
+  notes: Official Nornir inventory plugin for Infrahub.

@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/opsmill-infrahub-openapi-original.json
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: HTTPBearer
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/opsmill-infrahub-openapi-original.json
+- name: APIKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-INFRAHUB-KEY
+  sources:
+  - openapi/opsmill-infrahub-openapi-original.json

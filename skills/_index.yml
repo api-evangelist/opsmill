@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/opsmill/infrahub-skills
+notes: >-
+  OpsMill publishes an official set of AI Agent Skills for developing with
+  Infrahub in the opsmill/infrahub-skills repository. Each skill lives in
+  skills/infrahub-<name>/ with a SKILL.md entry point, reference docs, examples,
+  and modular rules; shared references live in skills/infrahub-common/. The repo
+  ships AGENTS.md and CLAUDE.md and installs across Claude Code, GitHub Copilot,
+  Cursor and others via `npx skills`. These are provider-published and canonical
+  — captured here by reference rather than duplicated.
+install: npx skills
+repository: https://github.com/opsmill/infrahub-skills
+skills:
+- name: managing-schemas
+  description: Design infrastructure data models.
+- name: managing-objects
+  description: Create YAML data files for objects.
+- name: managing-checks
+  description: Write validation checks.
+- name: managing-generators
+  description: Build design-driven generators.
+- name: managing-transforms
+  description: Create data transforms.
+- name: managing-menus
+  description: Define navigation menus.
+- name: analyzing-data
+  description: Query live Infrahub data via MCP.
+- name: auditing-repo
+  description: Audit a repository against Infrahub best practices.
+- name: reporting-issues
+  description: Route bug/feature requests.
+- name: collecting-diagnostics
+  description: Gather diagnostic bundles.
+- name: importing-data
+  description: Convert CSV/TSV to Infrahub objects.

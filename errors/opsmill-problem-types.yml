@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/opsmill-infrahub-openapi-original.json
+format: fastapi-detail
+envelope:
+  field: detail
+  notes: >-
+    The Infrahub REST API is FastAPI-generated. Standard errors return a JSON
+    object with a `detail` field (string or structured); validation errors (422)
+    return an HTTPValidationError with a `detail[]` array of ValidationError
+    objects (loc, msg, type). Responses are application/json (not
+    application/problem+json / RFC 9457).
+problems:
+- status: 401
+  title: Authentication failed
+  meaning: Missing or invalid credentials (JWT bearer or X-INFRAHUB-KEY).
+  source_operation: openapi/opsmill-infrahub-openapi-original.json#/api/auth/ldap/login
+- status: 403
+  title: Forbidden / Enterprise runtime not active
+  meaning: >-
+    Caller lacks permission for the resource, or the operation requires the
+    Infrahub Enterprise runtime (EnterpriseRequiredResponse).
+  source_operation: openapi/opsmill-infrahub-openapi-original.json#/api/auth/ldap/login
+- status: 409
+  title: Conflict
+  meaning: >-
+    Resource conflict — e.g. an LDAP username collides with an existing
+    local-only account (LDAPCollisionResponse).
+  source_operation: openapi/opsmill-infrahub-openapi-original.json#/api/auth/ldap/login
+- status: 422
+  title: Unprocessable Entity (validation error)
+  meaning: Request body/params failed validation; see detail[] (loc, msg, type).
+  schema: HTTPValidationError
+- status: 502
+  title: Bad Gateway
+  meaning: An upstream dependency was unavailable (e.g. the LDAP directory).
+  source_operation: openapi/opsmill-infrahub-openapi-original.json#/api/auth/ldap/login

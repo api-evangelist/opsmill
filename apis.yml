@@ -1,8 +1,28 @@
 aid: opsmill
 name: OpsMill
-description: 'OpsMill is a company surfaced as a portfolio company of partech and added to the API Evangelist
-  network as a stub for enrichment. Sector: Infrastructure SaaS. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  OpsMill is the company behind Infrahub, an open-source, graph-based
+  infrastructure data management platform that unifies a source of truth for
+  network, data center, and cloud automation. Infrahub combines a flexible,
+  extensible schema, native version control with branching and merging, and
+  unified Git + graph-database storage, then exposes that data through a
+  GraphQL API, a REST API, a Python SDK, the infrahubctl CLI, a web UI, and a
+  Model Context Protocol (MCP) server so both automation pipelines and AI
+  agents can query, propose, and review infrastructure changes with peer
+  review and CI workflows built in.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/118297816?v=4
 url: https://raw.githubusercontent.com/api-evangelist/opsmill/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,16 +32,244 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Infrastructure Saas
-apis: []
+- Network Automation
+- Source Of Truth
+- Data Management
+- GraphQL
+- DevOps
+- Configuration Management
+- AIOps
+- Open Source
+apis:
+- name: Infrahub GraphQL API
+  description: >-
+    The GraphQL API is Infrahub's primary interface, auto-generated from core and user-defined schema
+    models, supporting branch-aware queries, time-travel (global branch), mutations, and subscriptions.
+    Endpoint at /graphql.
+  humanURL: https://docs.infrahub.app/development-resources/graphql/overview
+  baseURL: https://sandbox.infrahub.app/graphql
+  tags:
+  - GraphQL
+- aid: opsmill:opsmill-artifact-api
+  name: OpsMill Artifact API
+  description: The Artifact API from OpsMill — 2 operation(s) for artifact.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Artifact
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-artifact-api-openapi.yml
+- aid: opsmill:opsmill-auth-api
+  name: OpsMill Auth API
+  description: The Auth API from OpsMill — 4 operation(s) for auth.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-auth-api-openapi.yml
+- aid: opsmill:opsmill-config-api
+  name: OpsMill Config API
+  description: The Config API from OpsMill — 1 operation(s) for config.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Config
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-config-api-openapi.yml
+- aid: opsmill:opsmill-diff-api
+  name: OpsMill Diff API
+  description: The Diff API from OpsMill — 2 operation(s) for diff.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Diff
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-diff-api-openapi.yml
+- aid: opsmill:opsmill-file-api
+  name: OpsMill File API
+  description: The File API from OpsMill — 1 operation(s) for file.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - File
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-file-api-openapi.yml
+- aid: opsmill:opsmill-info-api
+  name: OpsMill Info API
+  description: The Info API from OpsMill — 1 operation(s) for info.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-info-api-openapi.yml
+- aid: opsmill:opsmill-menu-api
+  name: OpsMill Menu API
+  description: The Menu API from OpsMill — 1 operation(s) for menu.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Menu
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-menu-api-openapi.yml
+- aid: opsmill:opsmill-oauth2-api
+  name: OpsMill Oauth2 API
+  description: The Oauth2 API from OpsMill — 2 operation(s) for oauth2.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Oauth2
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-oauth2-api-openapi.yml
+- aid: opsmill:opsmill-oidc-api
+  name: OpsMill Oidc API
+  description: The Oidc API from OpsMill — 2 operation(s) for oidc.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Oidc
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-oidc-api-openapi.yml
+- aid: opsmill:opsmill-query-api
+  name: OpsMill Query API
+  description: The Query API from OpsMill — 1 operation(s) for query.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Query
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-query-api-openapi.yml
+- aid: opsmill:opsmill-schema-api
+  name: OpsMill Schema API
+  description: The Schema API from OpsMill — 6 operation(s) for schema.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Schema
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-schema-api-openapi.yml
+- aid: opsmill:opsmill-schema-graphql-api
+  name: OpsMill Schema.graphql API
+  description: The Schema.graphql API from OpsMill — 1 operation(s) for schema.graphql.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Schema.graphql
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-schema-graphql-api-openapi.yml
+- aid: opsmill:opsmill-storage-api
+  name: OpsMill Storage API
+  description: The Storage API from OpsMill — 6 operation(s) for storage.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-storage-api-openapi.yml
+- aid: opsmill:opsmill-telemetry-api
+  name: OpsMill Telemetry API
+  description: The Telemetry API from OpsMill — 1 operation(s) for telemetry.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Telemetry
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-telemetry-api-openapi.yml
+- aid: opsmill:opsmill-transform-api
+  name: OpsMill Transform API
+  description: The Transform API from OpsMill — 2 operation(s) for transform.
+  humanURL: https://docs.infrahub.app/reference
+  baseURL: https://sandbox.infrahub.app/api
+  tags:
+  - Transform
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-transform-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/opsmill-agentic-access.yml
+- type: DomainSecurity
+  url: security/opsmill-domain-security.yml
+- type: Authentication
+  url: authentication/opsmill-authentication.yml
 - type: Website
   url: https://opsmill.com/
+- type: DeveloperPortal
+  url: https://docs.infrahub.app/
+- type: Documentation
+  url: https://docs.infrahub.app/
+- type: APIReference
+  url: https://docs.infrahub.app/reference
+- type: GettingStarted
+  url: https://docs.infrahub.app/overview/quickstart
+- type: Sandbox
+  url: https://sandbox.infrahub.app
+- type: Blog
+  url: https://opsmill.com/blog/
+- type: Support
+  url: https://discord.com/invite/opsmill
+- type: GitHubOrganization
+  url: https://github.com/opsmill
+- type: Pricing
+  url: https://opsmill.com/pricing/
+- type: SignUp
+  url: https://opsmill.com/pricing/
+- type: PrivacyPolicy
+  url: https://opsmill.com/privacy-policy/
+- type: TermsOfService
+  url: https://opsmill.com/legal/
+- type: Packages
+  url: packages/opsmill-packages.yml
+- type: SDKs
+  url: packages/opsmill-packages.yml
+- type: CLI
+  url: cli/opsmill-cli.yml
+- type: MCPServer
+  url: mcp/opsmill-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/opsmill-llms.txt
+- type: Conventions
+  url: conventions/opsmill-conventions.yml
+- type: ErrorCatalog
+  url: errors/opsmill-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/opsmill-lifecycle.yml
+- type: ChangeLog
+  url: changelog/opsmill-changelog.yml
+- type: Conformance
+  url: conformance/opsmill-conformance.yml
+- type: DataModel
+  url: data-model/opsmill-data-model.yml
+- type: Overlay
+  url: overlays/opsmill-infrahub-overlay.yaml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

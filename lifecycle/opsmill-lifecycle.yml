@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/opsmill/infrahub/releases
+versioning:
+  scheme: semver
+  current: 1.10.5
+  docs: https://docs.infrahub.app/release-notes
+  notes: >-
+    Infrahub follows semantic versioning; the REST OpenAPI reports an
+    independent info.version (1.10.0 on the public sandbox). The GraphQL schema
+    is generated dynamically from core and user-defined schema models.
+release_notes: https://docs.infrahub.app/release-notes
+status_page: null
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No formal published deprecation policy or RFC 8594 Sunset/Deprecation header
+    support was found. Breaking changes are communicated through semver major
+    versions and dated GitHub release notes.
+sla:
+  url: https://opsmill.com/pricing/
+  notes: SLA-backed support is offered with the Infrahub Enterprise edition.
+deprecated_operations: []

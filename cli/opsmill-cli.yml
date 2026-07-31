@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.infrahub.app/infrahubctl/infrahubctl
+name: infrahubctl
+description: >-
+  infrahubctl is the official Infrahub command-line tool for interacting with a
+  remote Infrahub instance — managing schemas, branches, objects, generators,
+  transforms, and running data operations. It ships as the `ctl` extra of the
+  infrahub-sdk Python package.
+install:
+- method: pip
+  command: pip install 'infrahub-sdk[ctl]'
+binary: infrahubctl
+config:
+  env:
+  - INFRAHUB_ADDRESS
+  - INFRAHUB_API_TOKEN
+command_groups:
+- name: branch
+  description: Create, list, merge, rebase, and delete branches.
+- name: schema
+  description: Load, check, and manage schema definitions.
+- name: object
+  description: Load and manage object data from YAML files.
+- name: generator
+  description: Run and manage design-driven generators.
+- name: transform
+  description: Render Jinja2 and Python transforms.
+- name: check
+  description: Execute user-defined validation checks.
+- name: repository
+  description: Manage Git repository integrations.
+- name: menu
+  description: Manage navigation menus.
+- name: dump / load
+  description: Export and import data.

@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/opsmill-infrahub-openapi-original.json
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: REST API publishes an OpenAPI 3.1.0 document at /api/openapi.json.
+- id: graphql
+  conforms: true
+  evidence: Primary API is GraphQL; schema auto-generated and exposed as SDL.
+- id: oauth2
+  conforms: true
+  evidence: /api/oauth2/{provider}/authorize and /token endpoints for SSO providers.
+- id: oidc
+  conforms: true
+  evidence: /api/oidc/{provider}/authorize and /token endpoints; SSOProtocol schema.
+- id: ldap
+  conforms: true
+  evidence: /api/auth/ldap/login endpoint (Enterprise); LDAP authentication.
+- id: jwt-bearer
+  conforms: true
+  evidence: HTTPBearer security scheme; /api/auth/login issues access/refresh tokens.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use FastAPI `detail` envelope, not application/problem+json.
+- id: json-api
+  conforms: false
+- id: scim
+  conforms: false
+- id: fhir
+  conforms: false
+- id: asyncapi
+  conforms: false
+  evidence: No published AsyncAPI or webhook catalog found; events are internal (message bus).

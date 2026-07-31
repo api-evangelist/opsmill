@@ -1,0 +1,53 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: https://docs.infrahub.app/mcp
+server:
+  name: infrahub-mcp
+  transport: stdio        # also supports streamable-http (--transport streamable-http)
+  package: infrahub-mcp
+  install: pip install infrahub-mcp
+  repository: https://github.com/opsmill/infrahub-mcp
+  docs: https://docs.infrahub.app/mcp
+  run: infrahub-mcp
+  env:
+  - INFRAHUB_ADDRESS
+  - INFRAHUB_API_TOKEN
+  safety: >-
+    All writes are branch-isolated on an auto-created session branch and require
+    human approval via a Proposed Change before merging; agents never modify the
+    default branch directly.
+tools:
+- name: get_schema
+  description: Discover available schema kinds or retrieve full details for a single kind.
+- name: get_nodes
+  description: List nodes of a specific kind with filtering and pagination support.
+- name: search_nodes
+  description: Find nodes by partial name matching against the name attribute.
+- name: get_session_info
+  description: Return the current MCP session state and active branch.
+- name: query_graphql
+  description: Execute read-only GraphQL queries against Infrahub.
+- name: find_paths
+  description: Find the shortest path(s) between two nodes in the data graph.
+- name: find_reachable
+  description: Find nodes of given kinds reachable from a source node.
+- name: node_upsert
+  description: Create or update a node on the active session branch.
+- name: node_delete
+  description: Delete a node on the active session branch.
+- name: propose_changes
+  description: Open a Proposed Change (pull request) for human review.
+- name: mutate_graphql
+  description: Execute GraphQL mutations for complex write operations.
+- name: reset_session_branch
+  description: Reset or switch the active session branch.
+resources:
+- uri: infrahub://schema
+  description: Lists all available kinds; per-kind detail returns full attribute/filter maps.
+- uri: infrahub://schema/{kind}
+  description: Full attribute and filter details for a single kind.
+- uri: infrahub://graphql-schema
+  description: Exposes the GraphQL SDL.
+- uri: infrahub://branches
+  description: Lists all branches.

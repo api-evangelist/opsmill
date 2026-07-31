@@ -1,0 +1,42 @@
+{
+  "provider": "opsmill",
+  "sources": [
+    "opsmill-artifact-api-openapi.yml",
+    "opsmill-auth-api-openapi.yml",
+    "opsmill-config-api-openapi.yml",
+    "opsmill-diff-api-openapi.yml",
+    "opsmill-file-api-openapi.yml",
+    "opsmill-info-api-openapi.yml",
+    "opsmill-menu-api-openapi.yml",
+    "opsmill-oauth2-api-openapi.yml",
+    "opsmill-oidc-api-openapi.yml",
+    "opsmill-query-api-openapi.yml",
+    "opsmill-schema-api-openapi.yml",
+    "opsmill-schema-graphql-api-openapi.yml",
+    "opsmill-storage-api-openapi.yml",
+    "opsmill-telemetry-api-openapi.yml",
+    "opsmill-transform-api-openapi.yml"
+  ],
+  "outputs": [
+    "opsmill-artifact-api-openapi.yml",
+    "opsmill-auth-api-openapi.yml",
+    "opsmill-config-api-openapi.yml",
+    "opsmill-diff-api-openapi.yml",
+    "opsmill-file-api-openapi.yml",
+    "opsmill-info-api-openapi.yml",
+    "opsmill-menu-api-openapi.yml",
+    "opsmill-oauth2-api-openapi.yml",
+    "opsmill-oidc-api-openapi.yml",
+    "opsmill-query-api-openapi.yml",
+    "opsmill-schema-api-openapi.yml",
+    "opsmill-schema-graphql-api-openapi.yml",
+    "opsmill-storage-api-openapi.yml",
+    "opsmill-telemetry-api-openapi.yml",
+    "opsmill-transform-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

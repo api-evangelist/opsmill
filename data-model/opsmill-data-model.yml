@@ -1,0 +1,53 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/opsmill-infrahub-openapi-original.json
+notes: >-
+  Infrahub is schema-driven: the domain entities are user-defined at runtime, so
+  this graph is derived from the platform's meta-schema (the schema-of-schemas)
+  exposed by the REST OpenAPI, not from fixed business objects. A NodeSchema
+  (a "kind") composes AttributeSchema and RelationshipSchema; RelationshipSchema
+  points to a peer kind, forming the graph. GenericSchema/ProfileSchema/
+  TemplateSchema extend NodeSchema. The live entity model is served dynamically
+  via the GraphQL schema and the opsmill/schema-library.
+entities:
+- name: NodeSchema
+  description: A user-defined object kind (the core unit of the schema).
+- name: GenericSchema
+  description: An interface/abstract kind that NodeSchemas can implement.
+- name: AttributeSchema
+  description: A typed attribute belonging to a node or generic.
+- name: RelationshipSchema
+  description: A typed relationship from one kind to a peer kind.
+- name: SchemaBranch
+  description: A branch-scoped snapshot of the full schema.
+- name: Menu
+  description: Navigation menu composed of sections and items.
+relationships:
+- from: NodeSchema
+  to: AttributeSchema
+  kind: has_many
+  via: attributes
+- from: NodeSchema
+  to: RelationshipSchema
+  kind: has_many
+  via: relationships
+- from: RelationshipSchema
+  to: NodeSchema
+  kind: belongs_to
+  via: peer
+- from: NodeSchema
+  to: GenericSchema
+  kind: has_many
+  via: inherit_from
+- from: SchemaBranch
+  to: NodeSchema
+  kind: has_many
+  via: nodes
+- from: SchemaBranch
+  to: GenericSchema
+  kind: has_many
+  via: generics
+- from: Menu
+  to: MenuSection
+  kind: has_many
+  via: sections

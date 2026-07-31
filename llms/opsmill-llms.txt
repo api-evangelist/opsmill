@@ -1,0 +1,48 @@
+# OpsMill — Infrahub
+
+> OpsMill builds Infrahub, an open-source, graph-based infrastructure data
+> management platform that serves as a unified source of truth for network,
+> data center, and cloud automation. It combines an extensible schema, native
+> version control (branching, merging, peer review, CI), and unified Git +
+> graph-database storage, exposed through GraphQL, REST, a Python SDK, the
+> infrahubctl CLI, a web UI, and an MCP server for AI agents.
+
+## APIs
+
+- [Infrahub GraphQL API](https://docs.infrahub.app/development-resources/graphql/overview): Primary interface, auto-generated from schema, branch-aware queries/mutations/subscriptions (`/graphql`).
+- [Infrahub REST API](https://docs.infrahub.app/reference): Schema loading, artifact retrieval, object storage, auth, diff/file access (`/api`).
+
+## Specs & Artifacts
+
+- [OpenAPI 3.1 (REST)](openapi/opsmill-infrahub-openapi-original.json)
+- [Authentication profile](authentication/opsmill-authentication.yml)
+- [API conventions](conventions/opsmill-conventions.yml)
+- [Error catalog](errors/opsmill-problem-types.yml)
+- [Conformance](conformance/opsmill-conformance.yml)
+- [Lifecycle](lifecycle/opsmill-lifecycle.yml)
+- [Changelog](changelog/opsmill-changelog.yml)
+- [Data model](data-model/opsmill-data-model.yml)
+- [Packages / SDKs](packages/opsmill-packages.yml)
+- [MCP server](mcp/opsmill-mcp.yml)
+- [Agent Skills](skills/_index.yml)
+- [CLI (infrahubctl)](cli/opsmill-cli.yml)
+
+## Docs
+
+- [Documentation](https://docs.infrahub.app/)
+- [Quickstart](https://docs.infrahub.app/overview/quickstart)
+- [Python SDK](https://docs.infrahub.app/python-sdk/introduction)
+- [infrahubctl CLI](https://docs.infrahub.app/infrahubctl/infrahubctl)
+- [MCP server](https://docs.infrahub.app/mcp)
+- [Release notes](https://docs.infrahub.app/release-notes)
+- [Sandbox](https://sandbox.infrahub.app)
+
+## Developer
+
+- [GitHub org](https://github.com/opsmill)
+- [Python SDK repo](https://github.com/opsmill/infrahub-sdk-python)
+- [MCP server repo](https://github.com/opsmill/infrahub-mcp)
+- [AI Skills repo](https://github.com/opsmill/infrahub-skills)
+- [Pricing](https://opsmill.com/pricing/)
+- [Blog](https://opsmill.com/blog/)
+- [Discord community](https://discord.com/invite/opsmill)
