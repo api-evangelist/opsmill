@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Info API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/info",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Info"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

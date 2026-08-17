@@ -1,0 +1,185 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Schema API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/schema",
+            "params": [
+              {
+                "name": "namespaces",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Schema"
+        },
+        {
+          "info": {
+            "name": "Get Schema Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/schema/summary",
+            "params": [
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Schema Summary"
+        },
+        {
+          "info": {
+            "name": "Get Schema By Kind",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/schema/:schema_kind",
+            "params": [
+              {
+                "name": "schema_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Schema By Kind"
+        },
+        {
+          "info": {
+            "name": "Get Json Schema By Kind",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/schema/json_schema/:schema_kind",
+            "params": [
+              {
+                "name": "schema_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Json Schema By Kind"
+        },
+        {
+          "info": {
+            "name": "Load Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/schema/load",
+            "params": [
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Load Schema"
+        },
+        {
+          "info": {
+            "name": "Check Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/schema/check",
+            "params": [
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check Schema"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

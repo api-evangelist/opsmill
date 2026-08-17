@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Config API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/config"
+          },
+          "docs": "Get Config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Diff API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Diff",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Diff Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/diff/files",
+            "params": [
+              {
+                "name": "time_from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "time_to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "branch_only",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Diff Files"
+        },
+        {
+          "info": {
+            "name": "Get Diff Artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/diff/artifacts",
+            "params": [
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Diff Artifacts"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

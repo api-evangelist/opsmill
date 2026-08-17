@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Oauth2 API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Oauth2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/oauth2/:provider_name/authorize",
+            "params": [
+              {
+                "name": "provider_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "final_url",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Authorize"
+        },
+        {
+          "info": {
+            "name": "Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/oauth2/:provider_name/token",
+            "params": [
+              {
+                "name": "provider_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

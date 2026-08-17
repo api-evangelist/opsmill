@@ -1,0 +1,101 @@
+{
+  "item": [
+    {
+      "id": "a20e83a8-62eb-44f3-a809-6e7da0b90aeb",
+      "name": "Config",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da9a6b32-b46b-4159-a871-b5f988bae08e",
+          "name": "Get Config",
+          "request": {
+            "name": "Get Config",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f04ef785-c24e-453b-88c3-b66db9b99c0c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"main\": {\n    \"docs_index_path\": \"/opt/infrahub/docs/build/search-index.json\",\n    \"internal_address\": \"string\",\n    \"allow_anonymous_access\": true,\n    \"anonymous_access_role\": \"Anonymous User\",\n    \"telemetry_optout\": false,\n    \"telemetry_endpoint\": \"https://telemetry.opsmill.cloud/infrahub\",\n    \"permission_backends\": [\n      \"infrahub.permissions.LocalPermissionBackend\"\n    ],\n    \"public_url\": \"string\",\n    \"schema_strict_mode\": true,\n    \"diff_update_after_merge\": true,\n    \"delete_branch_after_merge\": false\n  },\n  \"logging\": {\n    \"remote\": {\n      \"enable\": false\n    }\n  },\n  \"analytics\": {\n    \"enable\": true,\n    \"address\": \"string\",\n    \"api_key\": \"string\"\n  },\n  \"experimental_features\": {\n    \"graphql_enums\": false,\n    \"value_db_index\": false\n  },\n  \"sso\": {\n    \"enabled\": true,\n    \"providers\": [\n      {\n        \"name\": \"string\",\n        \"display_label\": \"string\",\n        \"icon\": \"string\",\n        \"protocol\": \"oauth2\",\n        \"authorize_path\": \"string\",\n        \"token_path\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"display_label\": \"string\",\n        \"icon\": \"string\",\n        \"protocol\": \"oidc\",\n        \"authorize_path\": \"string\",\n        \"token_path\": \"string\"\n      }\n    ]\n  },\n  \"ldap\": {\n    \"enabled\": false,\n    \"display_label\": \"Sign in with LDAP\",\n    \"icon\": \"mdi:account-key-outline\"\n  },\n  \"installation_type\": \"string\",\n  \"policy\": {\n    \"required_proposed_change_approvals\": 0,\n    \"revoke_proposed_change_approvals\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "227c93f7-5912-4f54-b436-1eec04df1280",
+    "name": "Infrahub Artifact Config API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

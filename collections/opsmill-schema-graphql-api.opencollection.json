@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Schema.graphql API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schema.graphql",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Graphql Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/schema.graphql",
+            "params": [
+              {
+                "name": "sorted",
+                "value": "",
+                "type": "query",
+                "description": "Whether to sort the schema alphabetically."
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Graphql Schema"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

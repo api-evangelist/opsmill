@@ -1,0 +1,369 @@
+{
+  "item": [
+    {
+      "id": "439d0955-5fa1-48dc-9e90-e9b502912d84",
+      "name": "Diff",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62ee5a64-fb94-4514-9cb0-4b555ef4f53a",
+          "name": "Get Diff Files",
+          "request": {
+            "name": "Get Diff Files",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "diff",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time_from",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "time_to",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "branch_only",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<string>",
+                  "description": "Name of the branch to use for the query"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a9c0fd9e-ce57-429c-aa79-5ab1d9d9f0e3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "diff",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "branch_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "branch",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"key_0\": {\n      \"branch\": \"string\",\n      \"id\": \"string\",\n      \"commit_from\": \"string\",\n      \"commit_to\": \"string\",\n      \"display_name\": \"string\",\n      \"files\": [\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"unchanged\"\n        },\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"removed\"\n        }\n      ]\n    },\n    \"key_1\": {\n      \"branch\": \"string\",\n      \"id\": \"string\",\n      \"commit_from\": \"string\",\n      \"commit_to\": \"string\",\n      \"display_name\": \"string\",\n      \"files\": [\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"unchanged\"\n        },\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"added\"\n        }\n      ]\n    },\n    \"key_2\": {\n      \"branch\": \"string\",\n      \"id\": \"string\",\n      \"commit_from\": \"string\",\n      \"commit_to\": \"string\",\n      \"display_name\": \"string\",\n      \"files\": [\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"added\"\n        },\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"added\"\n        }\n      ]\n    }\n  },\n  \"key_1\": {\n    \"key_0\": {\n      \"branch\": \"string\",\n      \"id\": \"string\",\n      \"commit_from\": \"string\",\n      \"commit_to\": \"string\",\n      \"display_name\": \"string\",\n      \"files\": [\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"added\"\n        },\n        {\n          \"branch\": \"string\",\n          \"location\": \"string\",\n          \"action\": \"removed\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a67c179-6ed7-4930-b104-f1d2f21089ca",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "diff",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time_from",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time_to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "branch_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "branch",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a6bfbba-0b1e-4eee-9a54-ee7ce2d6658d",
+          "name": "Get Diff Artifacts",
+          "request": {
+            "name": "Get Diff Artifacts",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "diff",
+                "artifacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "branch",
+                  "value": "<string>",
+                  "description": "Name of the branch to use for the query"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2acd232d-71b3-4712-ac16-7eb7010ca99b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "diff",
+                    "artifacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"branch\": \"string\",\n    \"id\": \"string\",\n    \"action\": \"unchanged\",\n    \"display_label\": \"string\",\n    \"target\": {\n      \"id\": \"string\",\n      \"kind\": \"string\",\n      \"display_label\": \"string\"\n    },\n    \"item_new\": {\n      \"storage_id\": \"string\",\n      \"checksum\": \"string\"\n    },\n    \"item_previous\": {\n      \"storage_id\": \"string\",\n      \"checksum\": \"string\"\n    }\n  },\n  \"key_1\": {\n    \"branch\": \"string\",\n    \"id\": \"string\",\n    \"action\": \"unchanged\",\n    \"display_label\": \"string\",\n    \"target\": {\n      \"id\": \"string\",\n      \"kind\": \"string\",\n      \"display_label\": \"string\"\n    },\n    \"item_new\": {\n      \"storage_id\": \"string\",\n      \"checksum\": \"string\"\n    },\n    \"item_previous\": {\n      \"storage_id\": \"string\",\n      \"checksum\": \"string\"\n    }\n  },\n  \"key_2\": {\n    \"branch\": \"string\",\n    \"id\": \"string\",\n    \"action\": \"unchanged\",\n    \"display_label\": \"string\",\n    \"target\": {\n      \"id\": \"string\",\n      \"kind\": \"string\",\n      \"display_label\": \"string\"\n    },\n    \"item_new\": {\n      \"storage_id\": \"string\",\n      \"checksum\": \"string\"\n    },\n    \"item_previous\": {\n      \"storage_id\": \"string\",\n      \"checksum\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8b5b78a-1d9d-4775-b507-149bb88a520d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "diff",
+                    "artifacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "branch",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "69903158-658b-4e3a-846c-274d53117b66",
+    "name": "Infrahub Artifact Diff API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact File API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "File",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/file/:repository_id/:file_path",
+            "params": [
+              {
+                "name": "repository_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "commit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a file from a git repository.\n\nRaises:\n    CommitNotFoundError: When no commit is provided and the repository has no commits.\n    PropagatedFromWorkerError: When the worker returns an error response while reading the file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

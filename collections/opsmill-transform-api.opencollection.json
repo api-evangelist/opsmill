@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Transform API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transform",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Transform Python",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/transform/python/:transform_id",
+            "params": [
+              {
+                "name": "transform_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Transform Python"
+        },
+        {
+          "info": {
+            "name": "Transform Jinja2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/transform/jinja2/:transform_id",
+            "params": [
+              {
+                "name": "transform_id",
+                "value": "",
+                "type": "path",
+                "description": "ID or Name of the Jinja2 Transform to render"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Transform Jinja2"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

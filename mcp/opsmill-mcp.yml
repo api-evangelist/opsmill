@@ -4,7 +4,7 @@ status: published
 source: https://docs.infrahub.app/mcp
 server:
   name: infrahub-mcp
-  transport: stdio        # also supports streamable-http (--transport streamable-http)
+  transport: stdio
   package: infrahub-mcp
   install: pip install infrahub-mcp
   repository: https://github.com/opsmill/infrahub-mcp
@@ -13,10 +13,8 @@ server:
   env:
   - INFRAHUB_ADDRESS
   - INFRAHUB_API_TOKEN
-  safety: >-
-    All writes are branch-isolated on an auto-created session branch and require
-    human approval via a Proposed Change before merging; agents never modify the
-    default branch directly.
+  safety: All writes are branch-isolated on an auto-created session branch and require human approval
+    via a Proposed Change before merging; agents never modify the default branch directly.
 tools:
 - name: get_schema
   description: Discover available schema kinds or retrieve full details for a single kind.
@@ -51,3 +49,9 @@ resources:
   description: Exposes the GraphQL SDL.
 - uri: infrahub://branches
   description: Lists all branches.
+deployment:
+  mode: local-stdio
+  verified: searched
+  tools: 12
+  checked: '2026-08-12'
+  source: catalog MCP census

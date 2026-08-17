@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Query API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Graphql Query Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/query/:query_id",
+            "params": [
+              {
+                "name": "query_id",
+                "value": "",
+                "type": "path",
+                "description": "ID or Name of the GraphQL query to execute"
+              },
+              {
+                "name": "subscribers",
+                "value": "",
+                "type": "query",
+                "description": "List of subscribers to attach to the CoreGraphQLQueryGroup"
+              },
+              {
+                "name": "update_group",
+                "value": "",
+                "type": "query",
+                "description": "When True create or update a CoreGraphQLQueryGroup with all nodes related to this query."
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Graphql Query Get"
+        },
+        {
+          "info": {
+            "name": "Graphql Query Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/query/:query_id",
+            "params": [
+              {
+                "name": "query_id",
+                "value": "",
+                "type": "path",
+                "description": "ID or Name of the GraphQL query to execute"
+              },
+              {
+                "name": "subscribers",
+                "value": "",
+                "type": "query",
+                "description": "List of subscribers to attach to the CoreGraphQLQueryGroup"
+              },
+              {
+                "name": "update_group",
+                "value": "",
+                "type": "query",
+                "description": "When True create or update a CoreGraphQLQueryGroup with all nodes related to this query."
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Graphql Query Post"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

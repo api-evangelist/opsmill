@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Menu API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Menu",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/menu",
+            "params": [
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Menu"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

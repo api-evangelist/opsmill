@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infrahub Artifact Storage API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Storage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download File Object By Hfid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/storage/files/by-hfid/:kind",
+            "params": [
+              {
+                "name": "kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hfid",
+                "value": "",
+                "type": "query",
+                "description": "HFID component values in order"
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Return file for inline display rather than as an attachment"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download a file by the FileObject node's Human-Friendly ID (HFID).\n\nRequires `VIEW` permission on the FileObject node.\nReturns the binary file content with `Content-Type` from the node's `file_type` attribute and `Content-Disposition` header with the original\nfilename.\n\nRaises:\n    HTTPException: When the requested kind does not inherit from the FileObject schema."
+        },
+        {
+          "info": {
+            "name": "Download File Object By Storage Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/storage/files/by-storage-id/:storage_id",
+            "params": [
+              {
+                "name": "storage_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Return file for inline display rather than as an attachment"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download a file from storage by its storage_id.\n\nRequires `VIEW` permission on the FileObject node.\nReturns the binary file content with `Content-Type` from the node's `file_type` attribute and `Content-Disposition` header with the original\nfilename.\n\nRaises:\n    NodeNotFoundError: When no FileObject node matches the provided storage_id."
+        },
+        {
+          "info": {
+            "name": "Download File Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/storage/files/:node_id",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Return file for inline display rather than as an attachment"
+              },
+              {
+                "name": "branch",
+                "value": "",
+                "type": "query",
+                "description": "Name of the branch to use for the query"
+              },
+              {
+                "name": "at",
+                "value": "",
+                "type": "query",
+                "description": "Time to use for the query, in absolute or relative format"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download a file by the FileObject node's UUID.\n\nRequires `VIEW` permission on the FileObject node.\nReturns the binary file content with `Content-Type` from the node's `file_type` attribute and `Content-Disposition` header with the original\nfilename."
+        },
+        {
+          "info": {
+            "name": "Get File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/storage/object/:identifier",
+            "params": [
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get File"
+        },
+        {
+          "info": {
+            "name": "Upload Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/storage/upload/content",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload Content"
+        },
+        {
+          "info": {
+            "name": "Upload File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/storage/upload/file",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload File"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
