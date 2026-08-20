@@ -37,6 +37,17 @@ tags:
 - Company
 - Infrastructure Saas
 - Network Automation
+- Source of Truth
+- Data Management
+- GraphQL
+- DevOps
+- Configuration Management
+- AIOps
+- Open-Source
+tags_raw:
+- Company
+- Infrastructure Saas
+- Network Automation
 - Source Of Truth
 - Data Management
 - GraphQL
@@ -70,6 +81,8 @@ apis:
   humanURL: https://docs.infrahub.app/reference
   baseURL: https://sandbox.infrahub.app/api
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -120,6 +133,8 @@ apis:
   humanURL: https://docs.infrahub.app/reference
   baseURL: https://sandbox.infrahub.app/api
   tags:
+  - Menus
+  tags_raw:
   - Menu
   properties:
   - type: OpenAPI
@@ -130,6 +145,8 @@ apis:
   humanURL: https://docs.infrahub.app/reference
   baseURL: https://sandbox.infrahub.app/api
   tags:
+  - Authentication
+  tags_raw:
   - Oauth2
   properties:
   - type: OpenAPI
@@ -140,6 +157,8 @@ apis:
   humanURL: https://docs.infrahub.app/reference
   baseURL: https://sandbox.infrahub.app/api
   tags:
+  - OIDC
+  tags_raw:
   - Oidc
   properties:
   - type: OpenAPI
@@ -200,6 +219,8 @@ apis:
   humanURL: https://docs.infrahub.app/reference
   baseURL: https://sandbox.infrahub.app/api
   tags:
+  - Transforms
+  tags_raw:
   - Transform
   properties:
   - type: OpenAPI
