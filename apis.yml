@@ -152,18 +152,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/opsmill-menu-api-openapi.yml
-- aid: opsmill:opsmill-oauth2-api
-  name: OpsMill Oauth2 API
-  description: The Oauth2 API from OpsMill — 2 operation(s) for oauth2.
-  humanURL: https://docs.infrahub.app/reference
-  baseURL: https://sandbox.infrahub.app/api
-  tags:
-  - Authentication
-  tags_raw:
-  - Oauth2
-  properties:
-  - type: OpenAPI
-    url: openapi/opsmill-oauth2-api-openapi.yml
 - aid: opsmill:opsmill-oidc-api
   name: OpsMill Oidc API
   description: The Oidc API from OpsMill — 2 operation(s) for oidc.
@@ -238,6 +226,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/opsmill-transform-api-openapi.yml
+- aid: opsmill:opsmill-oauth2-api
+  name: OpsMill Oauth2 API
+  description: The Oauth2 API from OpsMill — 2 operation(s) for oauth2.
+  humanURL: https://docs.infrahub.app/development-resources/graphql/overview
+  baseURL: https://sandbox.infrahub.app/graphql
+  tags:
+  - Oauth2
+  properties:
+  - type: OpenAPI
+    url: openapi/opsmill-oauth2-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
