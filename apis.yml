@@ -232,6 +232,8 @@ apis:
   humanURL: https://docs.infrahub.app/development-resources/graphql/overview
   baseURL: https://sandbox.infrahub.app/graphql
   tags:
+  - Authentication
+  tags_raw:
   - Oauth2
   properties:
   - type: OpenAPI
