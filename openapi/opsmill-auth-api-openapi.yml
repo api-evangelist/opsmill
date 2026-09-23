@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Infrahub Artifact Auth API
+  title: Infrahub Auth API
   version: 1.10.0
 tags:
 - name: Auth
@@ -110,30 +110,6 @@ paths:
       - Auth
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PasswordCredential:
-      properties:
-        username:
-          type: string
-          title: Username
-          description: Name of the user that is logging in.
-        password:
-          type: string
-          title: Password
-          description: The password of the user.
-      type: object
-      required:
-      - username
-      - password
-      title: PasswordCredential
     AccessTokenResponse:
       properties:
         access_token:
@@ -144,24 +120,21 @@ components:
       required:
       - access_token
       title: AccessTokenResponse
-    EnterpriseRequiredResponse:
+    UserToken:
       properties:
-        error_code:
+        access_token:
           type: string
-          title: Error Code
-          default: ENTERPRISE_REQUIRED
-        feature:
+          title: Access Token
+          description: JWT access_token
+        refresh_token:
           type: string
-          title: Feature
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
+          title: Refresh Token
+          description: JWT refresh_token
       type: object
       required:
-      - feature
-      title: EnterpriseRequiredResponse
+      - access_token
+      - refresh_token
+      title: UserToken
     ValidationError:
       properties:
         loc:
@@ -202,6 +175,30 @@ components:
       required:
       - error_code
       title: LDAPAuthErrorResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PasswordCredential:
+      properties:
+        username:
+          type: string
+          title: Username
+          description: Name of the user that is logging in.
+        password:
+          type: string
+          title: Password
+          description: The password of the user.
+      type: object
+      required:
+      - username
+      - password
+      title: PasswordCredential
     LDAPCredentials:
       properties:
         username:
@@ -236,21 +233,24 @@ components:
       required:
       - account_name
       title: LDAPCollisionResponse
-    UserToken:
+    EnterpriseRequiredResponse:
       properties:
-        access_token:
+        error_code:
           type: string
-          title: Access Token
-          description: JWT access_token
-        refresh_token:
+          title: Error Code
+          default: ENTERPRISE_REQUIRED
+        feature:
           type: string
-          title: Refresh Token
-          description: JWT refresh_token
+          title: Feature
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
       type: object
       required:
-      - access_token
-      - refresh_token
-      title: UserToken
+      - feature
+      title: EnterpriseRequiredResponse
   securitySchemes:
     HTTPBearer:
       type: http

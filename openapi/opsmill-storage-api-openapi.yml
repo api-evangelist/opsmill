@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Infrahub Artifact Storage API
+  title: Infrahub Storage API
   version: 1.10.0
 tags:
 - name: Storage
@@ -8,7 +8,19 @@ paths:
   /api/storage/files/by-hfid/{kind}:
     get:
       summary: Download File Object By Hfid
-      description: "Download a file by the FileObject node's Human-Friendly ID (HFID).\n\nRequires `VIEW` permission on the FileObject node.\nReturns the binary file content with `Content-Type` from the node's `file_type` attribute and `Content-Disposition` header with the original\nfilename.\n\nRaises:\n    HTTPException: When the requested kind does not inherit from the FileObject schema."
+      description: 'Download a file by the FileObject node''s Human-Friendly ID (HFID).
+
+
+        Requires `VIEW` permission on the FileObject node.
+
+        Returns the binary file content with `Content-Type` from the node''s `file_type` attribute and `Content-Disposition` header with the original
+
+        filename.
+
+
+        Raises:
+
+        HTTPException: When the requested kind does not inherit from the FileObject schema.'
       operationId: download_file_object_by_hfid_api_storage_files_by_hfid__kind__get
       security:
       - HTTPBearer: []
@@ -78,7 +90,19 @@ paths:
   /api/storage/files/by-storage-id/{storage_id}:
     get:
       summary: Download File Object By Storage Id
-      description: "Download a file from storage by its storage_id.\n\nRequires `VIEW` permission on the FileObject node.\nReturns the binary file content with `Content-Type` from the node's `file_type` attribute and `Content-Disposition` header with the original\nfilename.\n\nRaises:\n    NodeNotFoundError: When no FileObject node matches the provided storage_id."
+      description: 'Download a file from storage by its storage_id.
+
+
+        Requires `VIEW` permission on the FileObject node.
+
+        Returns the binary file content with `Content-Type` from the node''s `file_type` attribute and `Content-Disposition` header with the original
+
+        filename.
+
+
+        Raises:
+
+        NodeNotFoundError: When no FileObject node matches the provided storage_id.'
       operationId: download_file_object_by_storage_id_api_storage_files_by_storage_id__storage_id__get
       security:
       - HTTPBearer: []
@@ -288,6 +312,19 @@ paths:
       - Storage
 components:
   schemas:
+    UploadResponse:
+      properties:
+        identifier:
+          type: string
+          title: Identifier
+        checksum:
+          type: string
+          title: Checksum
+      type: object
+      required:
+      - identifier
+      - checksum
+      title: UploadResponse
     HTTPValidationError:
       properties:
         detail:
@@ -297,6 +334,25 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    Body_upload_file_api_storage_upload_file_post:
+      properties:
+        file:
+          type: string
+          contentMediaType: application/octet-stream
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_file_api_storage_upload_file_post
+    UploadContentPayload:
+      properties:
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - content
+      title: UploadContentPayload
     ValidationError:
       properties:
         loc:
@@ -323,38 +379,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Body_upload_file_api_storage_upload_file_post:
-      properties:
-        file:
-          type: string
-          contentMediaType: application/octet-stream
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_upload_file_api_storage_upload_file_post
-    UploadContentPayload:
-      properties:
-        content:
-          type: string
-          title: Content
-      type: object
-      required:
-      - content
-      title: UploadContentPayload
-    UploadResponse:
-      properties:
-        identifier:
-          type: string
-          title: Identifier
-        checksum:
-          type: string
-          title: Checksum
-      type: object
-      required:
-      - identifier
-      - checksum
-      title: UploadResponse
   securitySchemes:
     HTTPBearer:
       type: http

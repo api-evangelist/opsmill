@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Infrahub Artifact Diff API
+  title: Infrahub Diff API
   version: 1.10.0
 tags:
 - name: Diff
@@ -137,54 +137,22 @@ components:
       - id
       - action
       title: BranchDiffArtifact
-    HTTPValidationError:
+    BranchDiffFile:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
+        branch:
+          type: string
+          title: Branch
+        location:
+          type: string
           title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+        action:
+          $ref: '#/components/schemas/DiffAction'
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    BranchDiffArtifactStorage:
-      properties:
-        storage_id:
-          type: string
-          title: Storage Id
-        checksum:
-          type: string
-          title: Checksum
-      type: object
-      required:
-      - storage_id
-      - checksum
-      title: BranchDiffArtifactStorage
+      - branch
+      - location
+      - action
+      title: BranchDiffFile
     ArtifactTarget:
       properties:
         id:
@@ -203,22 +171,28 @@ components:
       - id
       - kind
       title: ArtifactTarget
-    BranchDiffFile:
+    HTTPValidationError:
       properties:
-        branch:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BranchDiffArtifactStorage:
+      properties:
+        storage_id:
           type: string
-          title: Branch
-        location:
+          title: Storage Id
+        checksum:
           type: string
-          title: Location
-        action:
-          $ref: '#/components/schemas/DiffAction'
+          title: Checksum
       type: object
       required:
-      - branch
-      - location
-      - action
-      title: BranchDiffFile
+      - storage_id
+      - checksum
+      title: BranchDiffArtifactStorage
     BranchDiffRepository:
       properties:
         branch:
@@ -258,6 +232,32 @@ components:
       - updated
       - unchanged
       title: DiffAction
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http

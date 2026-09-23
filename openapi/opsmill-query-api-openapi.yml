@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Infrahub Artifact Query API
+  title: Infrahub Query API
   version: 1.10.0
 tags:
 - name: Query
@@ -160,6 +160,14 @@ paths:
       - Query
 components:
   schemas:
+    QueryPayload:
+      properties:
+        variables:
+          additionalProperties: true
+          type: object
+          title: Variables
+      type: object
+      title: QueryPayload
     ValidationError:
       properties:
         loc:
@@ -195,14 +203,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    QueryPayload:
-      properties:
-        variables:
-          additionalProperties: true
-          type: object
-          title: Variables
-      type: object
-      title: QueryPayload
   securitySchemes:
     HTTPBearer:
       type: http

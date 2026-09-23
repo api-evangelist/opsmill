@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Infrahub Artifact API
   version: 1.10.0
@@ -111,6 +111,15 @@ paths:
       - Artifact
 components:
   schemas:
+    ArtifactGeneratePayload:
+      properties:
+        nodes:
+          items:
+            type: string
+          type: array
+          title: Nodes
+      type: object
+      title: ArtifactGeneratePayload
     ValidationError:
       properties:
         loc:
@@ -146,15 +155,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ArtifactGeneratePayload:
-      properties:
-        nodes:
-          items:
-            type: string
-          type: array
-          title: Nodes
-      type: object
-      title: ArtifactGeneratePayload
   securitySchemes:
     HTTPBearer:
       type: http

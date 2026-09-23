@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Infrahub Artifact File API
+  title: Infrahub File API
   version: 1.10.0
 tags:
 - name: File
@@ -8,7 +8,14 @@ paths:
   /api/file/{repository_id}/{file_path}:
     get:
       summary: Get File
-      description: "Retrieve a file from a git repository.\n\nRaises:\n    CommitNotFoundError: When no commit is provided and the repository has no commits.\n    PropagatedFromWorkerError: When the worker returns an error response while reading the file."
+      description: 'Retrieve a file from a git repository.
+
+
+        Raises:
+
+        CommitNotFoundError: When no commit is provided and the repository has no commits.
+
+        PropagatedFromWorkerError: When the worker returns an error response while reading the file.'
       operationId: get_file_api_file__repository_id___file_path__get
       security:
       - HTTPBearer: []

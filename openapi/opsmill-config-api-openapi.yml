@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Infrahub Artifact Config API
+  title: Infrahub Config API
   version: 1.10.0
 tags:
 - name: Config
@@ -20,6 +20,144 @@ paths:
       - Config
 components:
   schemas:
+    ConfigAPI:
+      properties:
+        main:
+          $ref: '#/components/schemas/MainSettings'
+        logging:
+          $ref: '#/components/schemas/LoggingSettings'
+        analytics:
+          $ref: '#/components/schemas/AnalyticsSettings'
+        experimental_features:
+          $ref: '#/components/schemas/ExperimentalFeaturesSettings'
+        sso:
+          $ref: '#/components/schemas/SSOInfo'
+        ldap:
+          $ref: '#/components/schemas/LDAPInfo'
+        installation_type:
+          type: string
+          title: Installation Type
+        policy:
+          $ref: '#/components/schemas/PolicySettings'
+      type: object
+      required:
+      - main
+      - logging
+      - analytics
+      - experimental_features
+      - sso
+      - ldap
+      - installation_type
+      - policy
+      title: ConfigAPI
+    SSOProviderInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+        display_label:
+          type: string
+          title: Display Label
+        icon:
+          type: string
+          title: Icon
+        protocol:
+          $ref: '#/components/schemas/SSOProtocol'
+        authorize_path:
+          type: string
+          title: Authorize Path
+          readOnly: true
+        token_path:
+          type: string
+          title: Token Path
+          readOnly: true
+      type: object
+      required:
+      - name
+      - display_label
+      - icon
+      - protocol
+      - authorize_path
+      - token_path
+      title: SSOProviderInfo
+    RemoteLoggingSettings:
+      properties:
+        enable:
+          type: boolean
+          title: Enable
+          default: false
+        frontend_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Frontend Dsn
+        api_server_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Server Dsn
+        git_agent_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Git Agent Dsn
+      additionalProperties: false
+      type: object
+      title: RemoteLoggingSettings
+    ExperimentalFeaturesSettings:
+      properties:
+        graphql_enums:
+          type: boolean
+          title: Graphql Enums
+          default: false
+        value_db_index:
+          type: boolean
+          title: Value Db Index
+          default: false
+          deprecated: true
+      additionalProperties: false
+      type: object
+      title: ExperimentalFeaturesSettings
+    LoggingSettings:
+      properties:
+        remote:
+          $ref: '#/components/schemas/RemoteLoggingSettings'
+          default:
+            enable: false
+      additionalProperties: false
+      type: object
+      title: LoggingSettings
+    SSOInfo:
+      properties:
+        providers:
+          items:
+            $ref: '#/components/schemas/SSOProviderInfo'
+          type: array
+          title: Providers
+        enabled:
+          type: boolean
+          title: Enabled
+          readOnly: true
+      type: object
+      required:
+      - enabled
+      title: SSOInfo
+    PolicySettings:
+      properties:
+        required_proposed_change_approvals:
+          type: integer
+          minimum: 0.0
+          title: Required Proposed Change Approvals
+          description: 'Number of approvals required for proposed changes. (Enterprise only: not available in the community version.)'
+          default: 0
+        revoke_proposed_change_approvals:
+          type: boolean
+          title: Revoke Proposed Change Approvals
+          description: 'Boolean indicating whether performing changes on a proposed change branch should revoke existing approvals. (Enterprise only: not available in the community version.)'
+          default: false
+      additionalProperties: false
+      type: object
+      title: PolicySettings
     LDAPInfo:
       properties:
         enabled:
@@ -103,75 +241,6 @@ components:
       additionalProperties: false
       type: object
       title: MainSettings
-    PolicySettings:
-      properties:
-        required_proposed_change_approvals:
-          type: integer
-          minimum: 0.0
-          title: Required Proposed Change Approvals
-          description: 'Number of approvals required for proposed changes. (Enterprise only: not available in the community version.)'
-          default: 0
-        revoke_proposed_change_approvals:
-          type: boolean
-          title: Revoke Proposed Change Approvals
-          description: 'Boolean indicating whether performing changes on a proposed change branch should revoke existing approvals. (Enterprise only: not available in the community version.)'
-          default: false
-      additionalProperties: false
-      type: object
-      title: PolicySettings
-    ConfigAPI:
-      properties:
-        main:
-          $ref: '#/components/schemas/MainSettings'
-        logging:
-          $ref: '#/components/schemas/LoggingSettings'
-        analytics:
-          $ref: '#/components/schemas/AnalyticsSettings'
-        experimental_features:
-          $ref: '#/components/schemas/ExperimentalFeaturesSettings'
-        sso:
-          $ref: '#/components/schemas/SSOInfo'
-        ldap:
-          $ref: '#/components/schemas/LDAPInfo'
-        installation_type:
-          type: string
-          title: Installation Type
-        policy:
-          $ref: '#/components/schemas/PolicySettings'
-      type: object
-      required:
-      - main
-      - logging
-      - analytics
-      - experimental_features
-      - sso
-      - ldap
-      - installation_type
-      - policy
-      title: ConfigAPI
-    ExperimentalFeaturesSettings:
-      properties:
-        graphql_enums:
-          type: boolean
-          title: Graphql Enums
-          default: false
-        value_db_index:
-          type: boolean
-          title: Value Db Index
-          default: false
-          deprecated: true
-      additionalProperties: false
-      type: object
-      title: ExperimentalFeaturesSettings
-    LoggingSettings:
-      properties:
-        remote:
-          $ref: '#/components/schemas/RemoteLoggingSettings'
-          default:
-            enable: false
-      additionalProperties: false
-      type: object
-      title: LoggingSettings
     AnalyticsSettings:
       properties:
         enable:
@@ -191,81 +260,12 @@ components:
       additionalProperties: false
       type: object
       title: AnalyticsSettings
-    SSOProviderInfo:
-      properties:
-        name:
-          type: string
-          title: Name
-        display_label:
-          type: string
-          title: Display Label
-        icon:
-          type: string
-          title: Icon
-        protocol:
-          $ref: '#/components/schemas/SSOProtocol'
-        authorize_path:
-          type: string
-          title: Authorize Path
-          readOnly: true
-        token_path:
-          type: string
-          title: Token Path
-          readOnly: true
-      type: object
-      required:
-      - name
-      - display_label
-      - icon
-      - protocol
-      - authorize_path
-      - token_path
-      title: SSOProviderInfo
-    RemoteLoggingSettings:
-      properties:
-        enable:
-          type: boolean
-          title: Enable
-          default: false
-        frontend_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Frontend Dsn
-        api_server_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Server Dsn
-        git_agent_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Git Agent Dsn
-      additionalProperties: false
-      type: object
-      title: RemoteLoggingSettings
     SSOProtocol:
       type: string
       enum:
       - oauth2
       - oidc
       title: SSOProtocol
-    SSOInfo:
-      properties:
-        providers:
-          items:
-            $ref: '#/components/schemas/SSOProviderInfo'
-          type: array
-          title: Providers
-        enabled:
-          type: boolean
-          title: Enabled
-          readOnly: true
-      type: object
-      required:
-      - enabled
-      title: SSOInfo
   securitySchemes:
     HTTPBearer:
       type: http
