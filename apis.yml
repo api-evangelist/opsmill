@@ -56,7 +56,7 @@ tags:
 - DevOps
 - Configuration Management
 - AIOps
-- Open-Source
+- Open Source
 tags_raw:
 - Company
 - Infrastructure Saas
@@ -68,6 +68,7 @@ tags_raw:
 - Configuration Management
 - AIOps
 - Open Source
+- Open-Source
 apis:
 - name: Infrahub GraphQL API
   description: >-

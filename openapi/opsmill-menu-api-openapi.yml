@@ -123,32 +123,6 @@ components:
       - label
       - identifier
       title: MenuItemList
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Menu:
-      properties:
-        sections:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/MenuItemList'
-            type: array
-          type: object
-          title: Sections
-      type: object
-      title: Menu
-    MenuSection:
-      type: string
-      enum:
-      - object
-      - internal
-      title: MenuSection
     ValidationError:
       properties:
         loc:
@@ -175,6 +149,32 @@ components:
       - msg
       - type
       title: ValidationError
+    Menu:
+      properties:
+        sections:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/MenuItemList'
+            type: array
+          type: object
+          title: Sections
+      type: object
+      title: Menu
+    MenuSection:
+      type: string
+      enum:
+      - object
+      - internal
+      title: MenuSection
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

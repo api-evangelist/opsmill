@@ -20,9 +20,7 @@
     "opsmill-telemetry-api-openapi.yml",
     "opsmill-transform-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -77,8 +75,7 @@
     "opsmill-infrahub-openapi-original.json: declared missing tag: Storage",
     "opsmill-infrahub-openapi-original.json: declared missing tag: Telemetry",
     "opsmill-infrahub-openapi-original.json: declared missing tag: Transform",
-    "superseded outputs removed: opsmill-o-auth2-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 16 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "opsmill-artifact-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -88,7 +85,7 @@
     "opsmill-file-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "opsmill-info-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "opsmill-menu-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "opsmill-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "opsmill-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "opsmill-oidc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "opsmill-query-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "opsmill-schema-api-openapi.yml: previously refined output, superseded by openapi/_original/",

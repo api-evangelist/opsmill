@@ -90,6 +90,47 @@ paths:
       - Telemetry
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TelemetrySnapshotListResponse:
+      properties:
+        count:
+          type: integer
+          title: Count
+        snapshots:
+          items:
+            $ref: '#/components/schemas/TelemetrySnapshotResponse'
+          type: array
+          title: Snapshots
+      type: object
+      required:
+      - count
+      - snapshots
+      title: TelemetrySnapshotListResponse
     RemoteSendStatus:
       type: string
       enum:
@@ -98,15 +139,6 @@ components:
       - skipped
       - failed
       title: RemoteSendStatus
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     TelemetrySnapshotResponse:
       properties:
         id:
@@ -148,47 +180,15 @@ components:
       - checksum
       - remote_send_status
       title: TelemetrySnapshotResponse
-    TelemetrySnapshotListResponse:
+    HTTPValidationError:
       properties:
-        count:
-          type: integer
-          title: Count
-        snapshots:
+        detail:
           items:
-            $ref: '#/components/schemas/TelemetrySnapshotResponse'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Snapshots
+          title: Detail
       type: object
-      required:
-      - count
-      - snapshots
-      title: TelemetrySnapshotListResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

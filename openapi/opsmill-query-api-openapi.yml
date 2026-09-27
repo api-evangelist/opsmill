@@ -160,14 +160,6 @@ paths:
       - Query
 components:
   schemas:
-    QueryPayload:
-      properties:
-        variables:
-          additionalProperties: true
-          type: object
-          title: Variables
-      type: object
-      title: QueryPayload
     ValidationError:
       properties:
         loc:
@@ -203,6 +195,14 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    QueryPayload:
+      properties:
+        variables:
+          additionalProperties: true
+          type: object
+          title: Variables
+      type: object
+      title: QueryPayload
   securitySchemes:
     HTTPBearer:
       type: http

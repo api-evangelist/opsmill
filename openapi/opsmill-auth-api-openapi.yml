@@ -110,31 +110,35 @@ paths:
       - Auth
 components:
   schemas:
-    AccessTokenResponse:
+    PasswordCredential:
       properties:
-        access_token:
+        username:
           type: string
-          title: Access Token
-          description: JWT access_token
+          title: Username
+          description: Name of the user that is logging in.
+        password:
+          type: string
+          title: Password
+          description: The password of the user.
       type: object
       required:
-      - access_token
-      title: AccessTokenResponse
-    UserToken:
+      - username
+      - password
+      title: PasswordCredential
+    LDAPAuthErrorResponse:
       properties:
-        access_token:
+        error_code:
           type: string
-          title: Access Token
-          description: JWT access_token
-        refresh_token:
-          type: string
-          title: Refresh Token
-          description: JWT refresh_token
+          title: Error Code
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
       type: object
       required:
-      - access_token
-      - refresh_token
-      title: UserToken
+      - error_code
+      title: LDAPAuthErrorResponse
     ValidationError:
       properties:
         loc:
@@ -161,44 +165,6 @@ components:
       - msg
       - type
       title: ValidationError
-    LDAPAuthErrorResponse:
-      properties:
-        error_code:
-          type: string
-          title: Error Code
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-      type: object
-      required:
-      - error_code
-      title: LDAPAuthErrorResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PasswordCredential:
-      properties:
-        username:
-          type: string
-          title: Username
-          description: Name of the user that is logging in.
-        password:
-          type: string
-          title: Password
-          description: The password of the user.
-      type: object
-      required:
-      - username
-      - password
-      title: PasswordCredential
     LDAPCredentials:
       properties:
         username:
@@ -215,24 +181,16 @@ components:
       - username
       - password
       title: LDAPCredentials
-    LDAPCollisionResponse:
+    AccessTokenResponse:
       properties:
-        error_code:
+        access_token:
           type: string
-          title: Error Code
-          default: LDAP_ACCOUNT_COLLISION
-        account_name:
-          type: string
-          title: Account Name
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
+          title: Access Token
+          description: JWT access_token
       type: object
       required:
-      - account_name
-      title: LDAPCollisionResponse
+      - access_token
+      title: AccessTokenResponse
     EnterpriseRequiredResponse:
       properties:
         error_code:
@@ -251,6 +209,48 @@ components:
       required:
       - feature
       title: EnterpriseRequiredResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UserToken:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+          description: JWT access_token
+        refresh_token:
+          type: string
+          title: Refresh Token
+          description: JWT refresh_token
+      type: object
+      required:
+      - access_token
+      - refresh_token
+      title: UserToken
+    LDAPCollisionResponse:
+      properties:
+        error_code:
+          type: string
+          title: Error Code
+          default: LDAP_ACCOUNT_COLLISION
+        account_name:
+          type: string
+          title: Account Name
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - account_name
+      title: LDAPCollisionResponse
   securitySchemes:
     HTTPBearer:
       type: http
