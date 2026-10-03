@@ -338,6 +338,34 @@ components:
       - msg
       - type
       title: ValidationError
+    Body_upload_file_api_storage_upload_file_post:
+      properties:
+        file:
+          type: string
+          contentMediaType: application/octet-stream
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_file_api_storage_upload_file_post
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UploadContentPayload:
+      properties:
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - content
+      title: UploadContentPayload
     UploadResponse:
       properties:
         identifier:
@@ -351,34 +379,6 @@ components:
       - identifier
       - checksum
       title: UploadResponse
-    UploadContentPayload:
-      properties:
-        content:
-          type: string
-          title: Content
-      type: object
-      required:
-      - content
-      title: UploadContentPayload
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_upload_file_api_storage_upload_file_post:
-      properties:
-        file:
-          type: string
-          contentMediaType: application/octet-stream
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_upload_file_api_storage_upload_file_post
   securitySchemes:
     HTTPBearer:
       type: http

@@ -104,19 +104,22 @@ paths:
       - Diff
 components:
   schemas:
-    BranchDiffArtifactStorage:
+    BranchDiffFile:
       properties:
-        storage_id:
+        branch:
           type: string
-          title: Storage Id
-        checksum:
+          title: Branch
+        location:
           type: string
-          title: Checksum
+          title: Location
+        action:
+          $ref: '#/components/schemas/DiffAction'
       type: object
       required:
-      - storage_id
-      - checksum
-      title: BranchDiffArtifactStorage
+      - branch
+      - location
+      - action
+      title: BranchDiffFile
     ValidationError:
       properties:
         loc:
@@ -143,37 +146,14 @@ components:
       - msg
       - type
       title: ValidationError
-    BranchDiffRepository:
-      properties:
-        branch:
-          type: string
-          title: Branch
-        id:
-          type: string
-          title: Id
-        display_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Name
-        commit_from:
-          type: string
-          title: Commit From
-        commit_to:
-          type: string
-          title: Commit To
-        files:
-          items:
-            $ref: '#/components/schemas/BranchDiffFile'
-          type: array
-          title: Files
-      type: object
-      required:
-      - branch
-      - id
-      - commit_from
-      - commit_to
-      title: BranchDiffRepository
+    DiffAction:
+      type: string
+      enum:
+      - added
+      - removed
+      - updated
+      - unchanged
+      title: DiffAction
     BranchDiffArtifact:
       properties:
         branch:
@@ -207,6 +187,28 @@ components:
       - id
       - action
       title: BranchDiffArtifact
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BranchDiffArtifactStorage:
+      properties:
+        storage_id:
+          type: string
+          title: Storage Id
+        checksum:
+          type: string
+          title: Checksum
+      type: object
+      required:
+      - storage_id
+      - checksum
+      title: BranchDiffArtifactStorage
     ArtifactTarget:
       properties:
         id:
@@ -225,39 +227,37 @@ components:
       - id
       - kind
       title: ArtifactTarget
-    DiffAction:
-      type: string
-      enum:
-      - added
-      - removed
-      - updated
-      - unchanged
-      title: DiffAction
-    BranchDiffFile:
+    BranchDiffRepository:
       properties:
         branch:
           type: string
           title: Branch
-        location:
+        id:
           type: string
-          title: Location
-        action:
-          $ref: '#/components/schemas/DiffAction'
+          title: Id
+        display_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Name
+        commit_from:
+          type: string
+          title: Commit From
+        commit_to:
+          type: string
+          title: Commit To
+        files:
+          items:
+            $ref: '#/components/schemas/BranchDiffFile'
+          type: array
+          title: Files
       type: object
       required:
       - branch
-      - location
-      - action
-      title: BranchDiffFile
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - id
+      - commit_from
+      - commit_to
+      title: BranchDiffRepository
   securitySchemes:
     HTTPBearer:
       type: http

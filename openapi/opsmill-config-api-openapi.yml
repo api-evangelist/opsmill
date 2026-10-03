@@ -84,39 +84,6 @@ components:
       additionalProperties: false
       type: object
       title: MainSettings
-    ExperimentalFeaturesSettings:
-      properties:
-        graphql_enums:
-          type: boolean
-          title: Graphql Enums
-          default: false
-        value_db_index:
-          type: boolean
-          title: Value Db Index
-          default: false
-          deprecated: true
-      additionalProperties: false
-      type: object
-      title: ExperimentalFeaturesSettings
-    AnalyticsSettings:
-      properties:
-        enable:
-          type: boolean
-          title: Enable
-          default: true
-        address:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Address
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-      additionalProperties: false
-      type: object
-      title: AnalyticsSettings
     ConfigAPI:
       properties:
         main:
@@ -147,30 +114,6 @@ components:
       - installation_type
       - policy
       title: ConfigAPI
-    RemoteLoggingSettings:
-      properties:
-        enable:
-          type: boolean
-          title: Enable
-          default: false
-        frontend_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Frontend Dsn
-        api_server_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Server Dsn
-        git_agent_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Git Agent Dsn
-      additionalProperties: false
-      type: object
-      title: RemoteLoggingSettings
     PolicySettings:
       properties:
         required_proposed_change_approvals:
@@ -202,31 +145,6 @@ components:
       required:
       - enabled
       title: SSOInfo
-    LDAPInfo:
-      properties:
-        enabled:
-          type: boolean
-          title: Enabled
-          description: True when LDAP sign-in is available on this deployment, meaning it has been configured and the running edition supports it.
-          default: false
-        display_label:
-          type: string
-          title: Display Label
-          description: Text shown on the LDAP sign-in button on the login page.
-          default: Sign in with LDAP
-        icon:
-          type: string
-          title: Icon
-          description: Icon shown on the LDAP sign-in button on the login page.
-          default: mdi:account-key-outline
-      type: object
-      title: LDAPInfo
-    SSOProtocol:
-      type: string
-      enum:
-      - oauth2
-      - oidc
-      title: SSOProtocol
     SSOProviderInfo:
       properties:
         name:
@@ -257,6 +175,20 @@ components:
       - authorize_path
       - token_path
       title: SSOProviderInfo
+    ExperimentalFeaturesSettings:
+      properties:
+        graphql_enums:
+          type: boolean
+          title: Graphql Enums
+          default: false
+        value_db_index:
+          type: boolean
+          title: Value Db Index
+          default: false
+          deprecated: true
+      additionalProperties: false
+      type: object
+      title: ExperimentalFeaturesSettings
     LoggingSettings:
       properties:
         remote:
@@ -266,6 +198,74 @@ components:
       additionalProperties: false
       type: object
       title: LoggingSettings
+    AnalyticsSettings:
+      properties:
+        enable:
+          type: boolean
+          title: Enable
+          default: true
+        address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+      additionalProperties: false
+      type: object
+      title: AnalyticsSettings
+    LDAPInfo:
+      properties:
+        enabled:
+          type: boolean
+          title: Enabled
+          description: True when LDAP sign-in is available on this deployment, meaning it has been configured and the running edition supports it.
+          default: false
+        display_label:
+          type: string
+          title: Display Label
+          description: Text shown on the LDAP sign-in button on the login page.
+          default: Sign in with LDAP
+        icon:
+          type: string
+          title: Icon
+          description: Icon shown on the LDAP sign-in button on the login page.
+          default: mdi:account-key-outline
+      type: object
+      title: LDAPInfo
+    SSOProtocol:
+      type: string
+      enum:
+      - oauth2
+      - oidc
+      title: SSOProtocol
+    RemoteLoggingSettings:
+      properties:
+        enable:
+          type: boolean
+          title: Enable
+          default: false
+        frontend_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Frontend Dsn
+        api_server_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Server Dsn
+        git_agent_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Git Agent Dsn
+      additionalProperties: false
+      type: object
+      title: RemoteLoggingSettings
   securitySchemes:
     HTTPBearer:
       type: http
