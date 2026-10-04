@@ -20,6 +20,84 @@ paths:
       - Config
 components:
   schemas:
+    ExperimentalFeaturesSettings:
+      properties:
+        graphql_enums:
+          type: boolean
+          title: Graphql Enums
+          default: false
+        value_db_index:
+          type: boolean
+          title: Value Db Index
+          default: false
+          deprecated: true
+      additionalProperties: false
+      type: object
+      title: ExperimentalFeaturesSettings
+    ConfigAPI:
+      properties:
+        main:
+          $ref: '#/components/schemas/MainSettings'
+        logging:
+          $ref: '#/components/schemas/LoggingSettings'
+        analytics:
+          $ref: '#/components/schemas/AnalyticsSettings'
+        experimental_features:
+          $ref: '#/components/schemas/ExperimentalFeaturesSettings'
+        sso:
+          $ref: '#/components/schemas/SSOInfo'
+        ldap:
+          $ref: '#/components/schemas/LDAPInfo'
+        installation_type:
+          type: string
+          title: Installation Type
+        policy:
+          $ref: '#/components/schemas/PolicySettings'
+      type: object
+      required:
+      - main
+      - logging
+      - analytics
+      - experimental_features
+      - sso
+      - ldap
+      - installation_type
+      - policy
+      title: ConfigAPI
+    LDAPInfo:
+      properties:
+        enabled:
+          type: boolean
+          title: Enabled
+          description: True when LDAP sign-in is available on this deployment, meaning it has been configured and the running edition supports it.
+          default: false
+        display_label:
+          type: string
+          title: Display Label
+          description: Text shown on the LDAP sign-in button on the login page.
+          default: Sign in with LDAP
+        icon:
+          type: string
+          title: Icon
+          description: Icon shown on the LDAP sign-in button on the login page.
+          default: mdi:account-key-outline
+      type: object
+      title: LDAPInfo
+    SSOInfo:
+      properties:
+        providers:
+          items:
+            $ref: '#/components/schemas/SSOProviderInfo'
+          type: array
+          title: Providers
+        enabled:
+          type: boolean
+          title: Enabled
+          readOnly: true
+      type: object
+      required:
+      - enabled
+      title: SSOInfo
     MainSettings:
       properties:
         docs_index_path:
@@ -84,67 +162,34 @@ components:
       additionalProperties: false
       type: object
       title: MainSettings
-    ConfigAPI:
+    LoggingSettings:
       properties:
-        main:
-          $ref: '#/components/schemas/MainSettings'
-        logging:
-          $ref: '#/components/schemas/LoggingSettings'
-        analytics:
-          $ref: '#/components/schemas/AnalyticsSettings'
-        experimental_features:
-          $ref: '#/components/schemas/ExperimentalFeaturesSettings'
-        sso:
-          $ref: '#/components/schemas/SSOInfo'
-        ldap:
-          $ref: '#/components/schemas/LDAPInfo'
-        installation_type:
-          type: string
-          title: Installation Type
-        policy:
-          $ref: '#/components/schemas/PolicySettings'
-      type: object
-      required:
-      - main
-      - logging
-      - analytics
-      - experimental_features
-      - sso
-      - ldap
-      - installation_type
-      - policy
-      title: ConfigAPI
-    PolicySettings:
-      properties:
-        required_proposed_change_approvals:
-          type: integer
-          minimum: 0.0
-          title: Required Proposed Change Approvals
-          description: 'Number of approvals required for proposed changes. (Enterprise only: not available in the community version.)'
-          default: 0
-        revoke_proposed_change_approvals:
-          type: boolean
-          title: Revoke Proposed Change Approvals
-          description: 'Boolean indicating whether performing changes on a proposed change branch should revoke existing approvals. (Enterprise only: not available in the community version.)'
-          default: false
+        remote:
+          $ref: '#/components/schemas/RemoteLoggingSettings'
+          default:
+            enable: false
       additionalProperties: false
       type: object
-      title: PolicySettings
-    SSOInfo:
+      title: LoggingSettings
+    AnalyticsSettings:
       properties:
-        providers:
-          items:
-            $ref: '#/components/schemas/SSOProviderInfo'
-          type: array
-          title: Providers
-        enabled:
+        enable:
           type: boolean
-          title: Enabled
-          readOnly: true
+          title: Enable
+          default: true
+        address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+      additionalProperties: false
       type: object
-      required:
-      - enabled
-      title: SSOInfo
+      title: AnalyticsSettings
     SSOProviderInfo:
       properties:
         name:
@@ -175,73 +220,22 @@ components:
       - authorize_path
       - token_path
       title: SSOProviderInfo
-    ExperimentalFeaturesSettings:
+    PolicySettings:
       properties:
-        graphql_enums:
+        required_proposed_change_approvals:
+          type: integer
+          minimum: 0.0
+          title: Required Proposed Change Approvals
+          description: 'Number of approvals required for proposed changes. (Enterprise only: not available in the community version.)'
+          default: 0
+        revoke_proposed_change_approvals:
           type: boolean
-          title: Graphql Enums
+          title: Revoke Proposed Change Approvals
+          description: 'Boolean indicating whether performing changes on a proposed change branch should revoke existing approvals. (Enterprise only: not available in the community version.)'
           default: false
-        value_db_index:
-          type: boolean
-          title: Value Db Index
-          default: false
-          deprecated: true
       additionalProperties: false
       type: object
-      title: ExperimentalFeaturesSettings
-    LoggingSettings:
-      properties:
-        remote:
-          $ref: '#/components/schemas/RemoteLoggingSettings'
-          default:
-            enable: false
-      additionalProperties: false
-      type: object
-      title: LoggingSettings
-    AnalyticsSettings:
-      properties:
-        enable:
-          type: boolean
-          title: Enable
-          default: true
-        address:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Address
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-      additionalProperties: false
-      type: object
-      title: AnalyticsSettings
-    LDAPInfo:
-      properties:
-        enabled:
-          type: boolean
-          title: Enabled
-          description: True when LDAP sign-in is available on this deployment, meaning it has been configured and the running edition supports it.
-          default: false
-        display_label:
-          type: string
-          title: Display Label
-          description: Text shown on the LDAP sign-in button on the login page.
-          default: Sign in with LDAP
-        icon:
-          type: string
-          title: Icon
-          description: Icon shown on the LDAP sign-in button on the login page.
-          default: mdi:account-key-outline
-      type: object
-      title: LDAPInfo
-    SSOProtocol:
-      type: string
-      enum:
-      - oauth2
-      - oidc
-      title: SSOProtocol
+      title: PolicySettings
     RemoteLoggingSettings:
       properties:
         enable:
@@ -266,6 +260,12 @@ components:
       additionalProperties: false
       type: object
       title: RemoteLoggingSettings
+    SSOProtocol:
+      type: string
+      enum:
+      - oauth2
+      - oidc
+      title: SSOProtocol
   securitySchemes:
     HTTPBearer:
       type: http

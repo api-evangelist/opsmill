@@ -111,6 +111,15 @@ paths:
       - Artifact
 components:
   schemas:
+    ArtifactGeneratePayload:
+      properties:
+        nodes:
+          items:
+            type: string
+          type: array
+          title: Nodes
+      type: object
+      title: ArtifactGeneratePayload
     ValidationError:
       properties:
         loc:
@@ -137,15 +146,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ArtifactGeneratePayload:
-      properties:
-        nodes:
-          items:
-            type: string
-          type: array
-          title: Nodes
-      type: object
-      title: ArtifactGeneratePayload
     HTTPValidationError:
       properties:
         detail:

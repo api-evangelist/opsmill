@@ -312,6 +312,47 @@ paths:
       - Storage
 components:
   schemas:
+    UploadResponse:
+      properties:
+        identifier:
+          type: string
+          title: Identifier
+        checksum:
+          type: string
+          title: Checksum
+      type: object
+      required:
+      - identifier
+      - checksum
+      title: UploadResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_upload_file_api_storage_upload_file_post:
+      properties:
+        file:
+          type: string
+          contentMediaType: application/octet-stream
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_file_api_storage_upload_file_post
+    UploadContentPayload:
+      properties:
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - content
+      title: UploadContentPayload
     ValidationError:
       properties:
         loc:
@@ -338,47 +379,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Body_upload_file_api_storage_upload_file_post:
-      properties:
-        file:
-          type: string
-          contentMediaType: application/octet-stream
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_upload_file_api_storage_upload_file_post
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    UploadContentPayload:
-      properties:
-        content:
-          type: string
-          title: Content
-      type: object
-      required:
-      - content
-      title: UploadContentPayload
-    UploadResponse:
-      properties:
-        identifier:
-          type: string
-          title: Identifier
-        checksum:
-          type: string
-          title: Checksum
-      type: object
-      required:
-      - identifier
-      - checksum
-      title: UploadResponse
   securitySchemes:
     HTTPBearer:
       type: http

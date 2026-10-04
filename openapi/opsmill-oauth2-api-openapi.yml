@@ -78,6 +78,26 @@ paths:
       - OAuth2
 components:
   schemas:
+    UserTokenWithUrl:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+          description: JWT access_token
+        refresh_token:
+          type: string
+          title: Refresh Token
+          description: JWT refresh_token
+        final_url:
+          type: string
+          title: Final Url
+          description: The final url after logged in
+      type: object
+      required:
+      - access_token
+      - refresh_token
+      - final_url
+      title: UserTokenWithUrl
     ValidationError:
       properties:
         loc:
@@ -104,26 +124,6 @@ components:
       - msg
       - type
       title: ValidationError
-    UserTokenWithUrl:
-      properties:
-        access_token:
-          type: string
-          title: Access Token
-          description: JWT access_token
-        refresh_token:
-          type: string
-          title: Refresh Token
-          description: JWT refresh_token
-        final_url:
-          type: string
-          title: Final Url
-          description: The final url after logged in
-      type: object
-      required:
-      - access_token
-      - refresh_token
-      - final_url
-      title: UserTokenWithUrl
     HTTPValidationError:
       properties:
         detail:

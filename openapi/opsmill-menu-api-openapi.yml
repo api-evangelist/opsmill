@@ -50,43 +50,6 @@ paths:
       - Menu
 components:
   schemas:
-    Menu:
-      properties:
-        sections:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/MenuItemList'
-            type: array
-          type: object
-          title: Sections
-      type: object
-      title: Menu
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     MenuSection:
       type: string
       enum:
@@ -102,6 +65,17 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    Menu:
+      properties:
+        sections:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/MenuItemList'
+            type: array
+          type: object
+          title: Sections
+      type: object
+      title: Menu
     MenuItemList:
       properties:
         id:
@@ -175,6 +149,32 @@ components:
       - label
       - identifier
       title: MenuItemList
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http
