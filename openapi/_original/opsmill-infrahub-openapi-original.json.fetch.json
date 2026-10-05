@@ -1,0 +1,12 @@
+{
+ "url": "https://sandbox.infrahub.app/api/openapi.json",
+ "requested_url": "https://sandbox.infrahub.app/api/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 155385,
+ "sha256": "b56871bb05762edd37f38501ecae39701848bdfb7e6d3716715aef1fe0a86099",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
