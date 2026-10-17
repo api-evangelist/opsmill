@@ -20,20 +20,55 @@ paths:
       - Config
 components:
   schemas:
-    ExperimentalFeaturesSettings:
+    SSOProviderInfo:
       properties:
-        graphql_enums:
+        name:
+          type: string
+          title: Name
+        display_label:
+          type: string
+          title: Display Label
+        icon:
+          type: string
+          title: Icon
+        protocol:
+          $ref: '#/components/schemas/SSOProtocol'
+        authorize_path:
+          type: string
+          title: Authorize Path
+          readOnly: true
+        token_path:
+          type: string
+          title: Token Path
+          readOnly: true
+      type: object
+      required:
+      - name
+      - display_label
+      - icon
+      - protocol
+      - authorize_path
+      - token_path
+      title: SSOProviderInfo
+    AnalyticsSettings:
+      properties:
+        enable:
           type: boolean
-          title: Graphql Enums
-          default: false
-        value_db_index:
-          type: boolean
-          title: Value Db Index
-          default: false
-          deprecated: true
+          title: Enable
+          default: true
+        address:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
       additionalProperties: false
       type: object
-      title: ExperimentalFeaturesSettings
+      title: AnalyticsSettings
     ConfigAPI:
       properties:
         main:
@@ -64,6 +99,76 @@ components:
       - installation_type
       - policy
       title: ConfigAPI
+    PolicySettings:
+      properties:
+        required_proposed_change_approvals:
+          type: integer
+          minimum: 0.0
+          title: Required Proposed Change Approvals
+          description: 'Number of approvals required for proposed changes. (Enterprise only: not available in the community version.)'
+          default: 0
+        revoke_proposed_change_approvals:
+          type: boolean
+          title: Revoke Proposed Change Approvals
+          description: 'Boolean indicating whether performing changes on a proposed change branch should revoke existing approvals. (Enterprise only: not available in the community version.)'
+          default: false
+      additionalProperties: false
+      type: object
+      title: PolicySettings
+    RemoteLoggingSettings:
+      properties:
+        enable:
+          type: boolean
+          title: Enable
+          default: false
+        frontend_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Frontend Dsn
+        api_server_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Server Dsn
+        git_agent_dsn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Git Agent Dsn
+      additionalProperties: false
+      type: object
+      title: RemoteLoggingSettings
+    SSOInfo:
+      properties:
+        providers:
+          items:
+            $ref: '#/components/schemas/SSOProviderInfo'
+          type: array
+          title: Providers
+        enabled:
+          type: boolean
+          title: Enabled
+          readOnly: true
+      type: object
+      required:
+      - enabled
+      title: SSOInfo
+    LoggingSettings:
+      properties:
+        remote:
+          $ref: '#/components/schemas/RemoteLoggingSettings'
+          default:
+            enable: false
+      additionalProperties: false
+      type: object
+      title: LoggingSettings
+    SSOProtocol:
+      type: string
+      enum:
+      - oauth2
+      - oidc
+      title: SSOProtocol
     LDAPInfo:
       properties:
         enabled:
@@ -83,21 +188,6 @@ components:
           default: mdi:account-key-outline
       type: object
       title: LDAPInfo
-    SSOInfo:
-      properties:
-        providers:
-          items:
-            $ref: '#/components/schemas/SSOProviderInfo'
-          type: array
-          title: Providers
-        enabled:
-          type: boolean
-          title: Enabled
-          readOnly: true
-      type: object
-      required:
-      - enabled
-      title: SSOInfo
     MainSettings:
       properties:
         docs_index_path:
@@ -162,110 +252,20 @@ components:
       additionalProperties: false
       type: object
       title: MainSettings
-    LoggingSettings:
+    ExperimentalFeaturesSettings:
       properties:
-        remote:
-          $ref: '#/components/schemas/RemoteLoggingSettings'
-          default:
-            enable: false
-      additionalProperties: false
-      type: object
-      title: LoggingSettings
-    AnalyticsSettings:
-      properties:
-        enable:
+        graphql_enums:
           type: boolean
-          title: Enable
-          default: true
-        address:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Address
-        api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Key
-      additionalProperties: false
-      type: object
-      title: AnalyticsSettings
-    SSOProviderInfo:
-      properties:
-        name:
-          type: string
-          title: Name
-        display_label:
-          type: string
-          title: Display Label
-        icon:
-          type: string
-          title: Icon
-        protocol:
-          $ref: '#/components/schemas/SSOProtocol'
-        authorize_path:
-          type: string
-          title: Authorize Path
-          readOnly: true
-        token_path:
-          type: string
-          title: Token Path
-          readOnly: true
-      type: object
-      required:
-      - name
-      - display_label
-      - icon
-      - protocol
-      - authorize_path
-      - token_path
-      title: SSOProviderInfo
-    PolicySettings:
-      properties:
-        required_proposed_change_approvals:
-          type: integer
-          minimum: 0.0
-          title: Required Proposed Change Approvals
-          description: 'Number of approvals required for proposed changes. (Enterprise only: not available in the community version.)'
-          default: 0
-        revoke_proposed_change_approvals:
-          type: boolean
-          title: Revoke Proposed Change Approvals
-          description: 'Boolean indicating whether performing changes on a proposed change branch should revoke existing approvals. (Enterprise only: not available in the community version.)'
+          title: Graphql Enums
           default: false
-      additionalProperties: false
-      type: object
-      title: PolicySettings
-    RemoteLoggingSettings:
-      properties:
-        enable:
+        value_db_index:
           type: boolean
-          title: Enable
+          title: Value Db Index
           default: false
-        frontend_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Frontend Dsn
-        api_server_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Api Server Dsn
-        git_agent_dsn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Git Agent Dsn
+          deprecated: true
       additionalProperties: false
       type: object
-      title: RemoteLoggingSettings
-    SSOProtocol:
-      type: string
-      enum:
-      - oauth2
-      - oidc
-      title: SSOProtocol
+      title: ExperimentalFeaturesSettings
   securitySchemes:
     HTTPBearer:
       type: http

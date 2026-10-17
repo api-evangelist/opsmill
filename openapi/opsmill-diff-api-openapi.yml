@@ -104,6 +104,32 @@ paths:
       - Diff
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     BranchDiffArtifactStorage:
       properties:
         storage_id:
@@ -117,41 +143,6 @@ components:
       - storage_id
       - checksum
       title: BranchDiffArtifactStorage
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ArtifactTarget:
-      properties:
-        id:
-          type: string
-          title: Id
-        kind:
-          type: string
-          title: Kind
-        display_label:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Label
-      type: object
-      required:
-      - id
-      - kind
-      title: ArtifactTarget
-    DiffAction:
-      type: string
-      enum:
-      - added
-      - removed
-      - updated
-      - unchanged
-      title: DiffAction
     BranchDiffRepository:
       properties:
         branch:
@@ -183,22 +174,24 @@ components:
       - commit_from
       - commit_to
       title: BranchDiffRepository
-    BranchDiffFile:
+    ArtifactTarget:
       properties:
-        branch:
+        id:
           type: string
-          title: Branch
-        location:
+          title: Id
+        kind:
           type: string
-          title: Location
-        action:
-          $ref: '#/components/schemas/DiffAction'
+          title: Kind
+        display_label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Label
       type: object
       required:
-      - branch
-      - location
-      - action
-      title: BranchDiffFile
+      - id
+      - kind
+      title: ArtifactTarget
     BranchDiffArtifact:
       properties:
         branch:
@@ -232,32 +225,39 @@ components:
       - id
       - action
       title: BranchDiffArtifact
-    ValidationError:
+    BranchDiffFile:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
+        branch:
+          type: string
+          title: Branch
+        location:
+          type: string
           title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+        action:
+          $ref: '#/components/schemas/DiffAction'
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - branch
+      - location
+      - action
+      title: BranchDiffFile
+    DiffAction:
+      type: string
+      enum:
+      - added
+      - removed
+      - updated
+      - unchanged
+      title: DiffAction
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

@@ -110,72 +110,6 @@ paths:
       - Auth
 components:
   schemas:
-    PasswordCredential:
-      properties:
-        username:
-          type: string
-          title: Username
-          description: Name of the user that is logging in.
-        password:
-          type: string
-          title: Password
-          description: The password of the user.
-      type: object
-      required:
-      - username
-      - password
-      title: PasswordCredential
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    LDAPCollisionResponse:
-      properties:
-        error_code:
-          type: string
-          title: Error Code
-          default: LDAP_ACCOUNT_COLLISION
-        account_name:
-          type: string
-          title: Account Name
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-      type: object
-      required:
-      - account_name
-      title: LDAPCollisionResponse
-    AccessTokenResponse:
-      properties:
-        access_token:
-          type: string
-          title: Access Token
-          description: JWT access_token
-      type: object
-      required:
-      - access_token
-      title: AccessTokenResponse
-    LDAPAuthErrorResponse:
-      properties:
-        error_code:
-          type: string
-          title: Error Code
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-      type: object
-      required:
-      - error_code
-      title: LDAPAuthErrorResponse
     LDAPCredentials:
       properties:
         username:
@@ -192,24 +126,21 @@ components:
       - username
       - password
       title: LDAPCredentials
-    EnterpriseRequiredResponse:
+    PasswordCredential:
       properties:
-        error_code:
+        username:
           type: string
-          title: Error Code
-          default: ENTERPRISE_REQUIRED
-        feature:
+          title: Username
+          description: Name of the user that is logging in.
+        password:
           type: string
-          title: Feature
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
+          title: Password
+          description: The password of the user.
       type: object
       required:
-      - feature
-      title: EnterpriseRequiredResponse
+      - username
+      - password
+      title: PasswordCredential
     UserToken:
       properties:
         access_token:
@@ -251,6 +182,75 @@ components:
       - msg
       - type
       title: ValidationError
+    EnterpriseRequiredResponse:
+      properties:
+        error_code:
+          type: string
+          title: Error Code
+          default: ENTERPRISE_REQUIRED
+        feature:
+          type: string
+          title: Feature
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - feature
+      title: EnterpriseRequiredResponse
+    LDAPAuthErrorResponse:
+      properties:
+        error_code:
+          type: string
+          title: Error Code
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - error_code
+      title: LDAPAuthErrorResponse
+    LDAPCollisionResponse:
+      properties:
+        error_code:
+          type: string
+          title: Error Code
+          default: LDAP_ACCOUNT_COLLISION
+        account_name:
+          type: string
+          title: Account Name
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - account_name
+      title: LDAPCollisionResponse
+    AccessTokenResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+          description: JWT access_token
+      type: object
+      required:
+      - access_token
+      title: AccessTokenResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http

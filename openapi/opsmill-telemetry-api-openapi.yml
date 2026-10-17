@@ -90,38 +90,6 @@ paths:
       - Telemetry
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    TelemetrySnapshotListResponse:
-      properties:
-        count:
-          type: integer
-          title: Count
-        snapshots:
-          items:
-            $ref: '#/components/schemas/TelemetrySnapshotResponse'
-          type: array
-          title: Snapshots
-      type: object
-      required:
-      - count
-      - snapshots
-      title: TelemetrySnapshotListResponse
-    RemoteSendStatus:
-      type: string
-      enum:
-      - pending
-      - sent
-      - skipped
-      - failed
-      title: RemoteSendStatus
     TelemetrySnapshotResponse:
       properties:
         id:
@@ -163,6 +131,14 @@ components:
       - checksum
       - remote_send_status
       title: TelemetrySnapshotResponse
+    RemoteSendStatus:
+      type: string
+      enum:
+      - pending
+      - sent
+      - skipped
+      - failed
+      title: RemoteSendStatus
     ValidationError:
       properties:
         loc:
@@ -189,6 +165,30 @@ components:
       - msg
       - type
       title: ValidationError
+    TelemetrySnapshotListResponse:
+      properties:
+        count:
+          type: integer
+          title: Count
+        snapshots:
+          items:
+            $ref: '#/components/schemas/TelemetrySnapshotResponse'
+          type: array
+          title: Snapshots
+      type: object
+      required:
+      - count
+      - snapshots
+      title: TelemetrySnapshotListResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http
