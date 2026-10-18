@@ -159,9 +159,10 @@ apis:
   humanURL: https://docs.infrahub.app/reference
   baseURL: https://sandbox.infrahub.app/api
   tags:
-  - OIDC
+  - OpenID Connect
   tags_raw:
   - Oidc
+  - OIDC
   properties:
   - type: OpenAPI
     url: openapi/opsmill-oidc-api-openapi.yml
