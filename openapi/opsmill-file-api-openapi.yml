@@ -121,3 +121,9 @@ components:
       type: apiKey
       in: header
       name: X-INFRAHUB-KEY
+x-provenance:
+  method: harvested
+  publisher: OpsMill
+  source: https://sandbox.infrahub.app/api/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
