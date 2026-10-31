@@ -64,6 +64,149 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-OpsMill is a company surfaced as a portfolio company of partech and added to the API Evangelist network as a stub for enrichment. Sector: Infrastructure SaaS. This profile is a lead awaiting the enrichment pipeline.
+OpsMill is the company behind Infrahub, an open-source, graph-based infrastructure data management platform that unifies a source of truth for network, data center, and cloud automation. Infrahub combines a flexible, extensible schema, native version control with branching and merging, and unified Git + graph-database storage, then exposes that data through a GraphQL API, a REST API, a Python SDK, the infrahubctl CLI, a web UI, and a Model Context Protocol (MCP) server so both automation pipelines and AI agents can query, propose, and review infrastructure changes with peer review and CI workflows built in.
 
-Backed by: partech — https://opsmill.com/
+**Areas:** Company · Infrastructure Saas · Network Automation · Source of Truth · Data Management · GraphQL · DevOps · Configuration Management · AIOps · Open Source
+
+## OpsMill on APIs.io
+
+Everything profiled for OpsMill is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/opsmill/](https://apis.io/providers/opsmill/)** — or go straight to one of the APIs or properties below.
+
+### APIs (16)
+
+- [Infrahub GraphQL API](https://apis.io/apis/opsmill/infrahub-graphql-api/) — The GraphQL API is Infrahub's primary interface, auto-generated from core and user-defined schema models, supporting branch-aware queries, time-travel…
+- [OpsMill Artifact API](https://apis.io/apis/opsmill/opsmill-artifact-api/) — The Artifact API from OpsMill — 2 operation(s) for artifact.
+- [OpsMill Auth API](https://apis.io/apis/opsmill/opsmill-auth-api/) — The Auth API from OpsMill — 4 operation(s) for auth.
+- [OpsMill Config API](https://apis.io/apis/opsmill/opsmill-config-api/) — The Config API from OpsMill — 1 operation(s) for config.
+- [OpsMill Diff API](https://apis.io/apis/opsmill/opsmill-diff-api/) — The Diff API from OpsMill — 2 operation(s) for diff.
+- [OpsMill File API](https://apis.io/apis/opsmill/opsmill-file-api/) — The File API from OpsMill — 1 operation(s) for file.
+- [OpsMill Info API](https://apis.io/apis/opsmill/opsmill-info-api/) — The Info API from OpsMill — 1 operation(s) for info.
+- [OpsMill Menu API](https://apis.io/apis/opsmill/opsmill-menu-api/) — The Menu API from OpsMill — 1 operation(s) for menu.
+- [OpsMill Oidc API](https://apis.io/apis/opsmill/opsmill-oidc-api/) — The Oidc API from OpsMill — 2 operation(s) for oidc.
+- [OpsMill Query API](https://apis.io/apis/opsmill/opsmill-query-api/) — The Query API from OpsMill — 1 operation(s) for query.
+- [OpsMill Schema API](https://apis.io/apis/opsmill/opsmill-schema-api/) — The Schema API from OpsMill — 6 operation(s) for schema.
+- [OpsMill Schema.graphql API](https://apis.io/apis/opsmill/opsmill-schema-graphql-api/) — The Schema.graphql API from OpsMill — 1 operation(s) for schema.graphql.
+- [OpsMill Storage API](https://apis.io/apis/opsmill/opsmill-storage-api/) — The Storage API from OpsMill — 6 operation(s) for storage.
+- [OpsMill Telemetry API](https://apis.io/apis/opsmill/opsmill-telemetry-api/) — The Telemetry API from OpsMill — 1 operation(s) for telemetry.
+- [OpsMill Transform API](https://apis.io/apis/opsmill/opsmill-transform-api/) — The Transform API from OpsMill — 2 operation(s) for transform.
+- [OpsMill Oauth2 API](https://apis.io/apis/opsmill/opsmill-oauth2-api/) — The Oauth2 API from OpsMill — 2 operation(s) for oauth2.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [infrahub-mcp](https://apis.io/servers/opsmill/infrahub-mcp/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Opsmill Agentic Access](https://apis.io/agentic-access/opsmill/opsmill-agentic-access/)
+
+#### Collections (15)
+
+Postman and Open Collection request collections.
+
+- [Infrahub Artifact API](https://apis.io/collections/opsmill/open-opsmill-artifact-api/)
+- [Infrahub Artifact Auth API](https://apis.io/collections/opsmill/open-opsmill-auth-api/)
+- [Infrahub Artifact Config API](https://apis.io/collections/opsmill/open-opsmill-config-api/)
+- [Infrahub Artifact Diff API](https://apis.io/collections/opsmill/open-opsmill-diff-api/)
+- [Infrahub Artifact File API](https://apis.io/collections/opsmill/open-opsmill-file-api/)
+- [Infrahub Artifact Info API](https://apis.io/collections/opsmill/open-opsmill-info-api/)
+- [Infrahub Artifact Menu API](https://apis.io/collections/opsmill/open-opsmill-menu-api/)
+- [Infrahub Artifact Oauth2 API](https://apis.io/collections/opsmill/open-opsmill-oauth2-api/)
+- [Infrahub Artifact Oidc API](https://apis.io/collections/opsmill/open-opsmill-oidc-api/)
+- [Infrahub Artifact Query API](https://apis.io/collections/opsmill/open-opsmill-query-api/)
+- [Infrahub Artifact Schema API](https://apis.io/collections/opsmill/open-opsmill-schema-api/)
+- [Infrahub Artifact Schema.graphql API](https://apis.io/collections/opsmill/open-opsmill-schema-graphql-api/)
+- [Infrahub Artifact Storage API](https://apis.io/collections/opsmill/open-opsmill-storage-api/)
+- [Infrahub Artifact Telemetry API](https://apis.io/collections/opsmill/open-opsmill-telemetry-api/)
+- [Infrahub Artifact Transform API](https://apis.io/collections/opsmill/open-opsmill-transform-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Opsmill Infrahub Overlay](https://apis.io/overlays/opsmill/opsmill-infrahub-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Opsmill Authentication](https://apis.io/security/opsmill/opsmill-authentication/)
+- [Opsmill Domain Security](https://apis.io/security/opsmill/opsmill-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://opsmill.com/)
+- [Documentation](https://docs.infrahub.app/)
+- [Getting started](https://docs.infrahub.app/overview/quickstart)
+- [API reference](https://docs.infrahub.app/reference)
+- [Pricing](https://opsmill.com/pricing/)
+- [Sign up](https://opsmill.com/pricing/)
+- [Support](https://discord.com/invite/opsmill)
+- [Blog](https://opsmill.com/blog/)
+- [Terms of service](https://opsmill.com/legal/)
+- [Privacy policy](https://opsmill.com/privacy-policy/)
+- [GitHub](https://github.com/opsmill)
+
+## API Evangelist rating
+
+**Kin Score 45.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 40.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 78.6 |
+| Access clarity | 44.7 |
+
+**Agent readiness 31.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/opsmill/](https://apis.io/providers/opsmill/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for OpsMill: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/opsmill/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
